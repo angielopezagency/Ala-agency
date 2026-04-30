@@ -605,10 +605,14 @@ async function sendRecovery() {
       </div>
       <a href="${window.location.href}" style="display:block;background:linear-gradient(90deg,#E63E6D,#FF6B8A);color:white;text-decoration:none;padding:14px;border-radius:8px;text-align:center;font-weight:600">Ir al Panel →</a>
     </div>`;
-    const res = await fetch('https://api.resend.com/emails', {
+    const res = await fetch('/.netlify/functions/email-proxy', {
       method: 'POST',
-      headers: {'Content-Type':'application/json','Authorization':`Bearer ${RESEND_KEY}`},
-      body: JSON.stringify({from:'ALA Agency <onboarding@resend.dev>',to:[ADMIN_EMAIL],subject:'🔑 Tu nueva clave — ALA Agency',html:emailHTML})
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        type: 'admin_recovery',
+        to: ADMIN_EMAIL,
+        data: { tempPass, panelUrl: window.location.href }
+      })
     });
 
     UI.spin(btn, false);
