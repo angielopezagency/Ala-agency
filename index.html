@@ -808,9 +808,7 @@ footer{background:#070709;border-top:1px solid rgba(255,107,138,.12);padding:cla
 
 <script>
 const WA='18097071943';
-const AK='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';
 // Cloudflare Worker URLs (actualizar después del deploy)
-// API Key de Anthropic — pegar aquí tu key (sk-ant-api03-...)
 
 
 
@@ -1150,9 +1148,9 @@ async function csend(){
   hist.push({role:'user',content:msg});
   showDots();
   try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{
+    const r=await fetch('/.netlify/functions/ai-proxy',{
       method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':AK,'anthropic-version':'2023-06-01'},
+      headers:{'Content-Type':'application/json'},
       body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:700,system:SP,messages:hist})
     });
     hideDots();
