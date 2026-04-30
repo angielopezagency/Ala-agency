@@ -22,18 +22,10 @@
 <body>
 
 <!-- LOGIN GATE -->
-<div id="loadingGate" style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0F0F14;flex-direction:column;gap:16px">
-  <svg width="48" height="48" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
-    <defs><linearGradient id="lgl" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#FF6B8A"/><stop offset="100%" style="stop-color:#FF9F1C"/></linearGradient></defs>
-    <rect width="44" height="44" rx="11" fill="url(#lgl)"/>
-    <rect x="7" y="18" width="30" height="19" rx="4" fill="white" opacity=".95"/>
-    <circle cx="22" cy="27" r="6.5" fill="url(#lgl)"/>
-    <circle cx="22" cy="27" r="2.2" fill="white" opacity=".9"/>
-  </svg>
-  <div style="color:rgba(255,255,255,.5);font-family:monospace;font-size:.75rem;letter-spacing:.15em">Cargando panel...</div>
+
 </div>
 
-<div id="loginGate" class="login-page" style="display:none">
+<div id="loginGate" class="login-page">
   <div class="login-bg"></div>
 
   <!-- LOGIN NORMAL -->
@@ -534,8 +526,7 @@ const ADMIN_PASS = 'ala2025admin'; // Cambia esto
 const ADMIN_EMAIL = 'angie.lpz08@gmail.com'; // Email del admin
 // Resend.com API key (obtener gratis en resend.com → API Keys)
 const RESEND_KEY = 're_1Q5Y69fk_PhFt5wxefXmM6d4kD3KQRkth';
-const AI_PROXY = '/.netlify/functions/ai-proxy';
-const EMAIL_PROXY = '/.netlify/functions/email-proxy';
+const AK = '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';
 
 let currentPage = 'dashboard';
 let editingJobId = null;
@@ -554,16 +545,12 @@ window.addEventListener('load', () => {
 
 // ── LOGIN / FORGOT ────────────────────────────────────
 function showLogin() {
-  const lg = document.getElementById('loadingGate');
-  if(lg) lg.style.display='none';
   document.getElementById('loginGate').style.display='flex';
   document.getElementById('loginCard').style.display='';
   document.getElementById('forgotCard').style.display='none';
 }
 
 function showApp() {
-  const lg = document.getElementById('loadingGate');
-  if(lg) lg.style.display='none';
   document.getElementById('loginGate').style.display='none';
   document.getElementById('appLayout').style.display='grid';
   Auth.save({ role:'admin', name:'Angie López' });
@@ -611,14 +598,18 @@ async function sendRecovery() {
   const tempPass = generateTempPass();
 
   try {
-    const res = await fetch(EMAIL_PROXY, {
+    const emailHTML = `<div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto;padding:30px;background:#1a1a24;color:white;border-radius:12px">
+      <h2 style="color:#FF6B8A">🔑 Clave temporal</h2>
+      <div style="background:rgba(255,107,138,.15);border:2px solid #FF6B8A;border-radius:10px;padding:24px;text-align:center;margin:20px 0">
+        <div style="color:#FF9F1C;font-family:monospace;font-size:2rem;font-weight:700;letter-spacing:4px">${tempPass}</div>
+        <p style="color:rgba(255,255,255,.5);font-size:13px;margin:10px 0 0">Válida 1 hora</p>
+      </div>
+      <a href="${window.location.href}" style="display:block;background:linear-gradient(90deg,#E63E6D,#FF6B8A);color:white;text-decoration:none;padding:14px;border-radius:8px;text-align:center;font-weight:600">Ir al Panel →</a>
+    </div>`;
+    const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        type: 'admin_recovery',
-        to: ADMIN_EMAIL,
-        data: { tempPass, panelUrl: window.location.href }
-      })
+      headers: {'Content-Type':'application/json','Authorization':`Bearer ${RESEND_KEY}`},
+      body: JSON.stringify({from:'ALA Agency <onboarding@resend.dev>',to:[ADMIN_EMAIL],subject:'🔑 Tu nueva clave — ALA Agency',html:emailHTML})
     });
 
     UI.spin(btn, false);
@@ -794,9 +785,9 @@ async function runAI() {
   document.getElementById('aiActions').style.display = 'flex';
 
   try {
-    const res = await fetch(AI_PROXY, {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {'Content-Type':'application/json','x-api-key':AK,'anthropic-version':'2023-06-01'},
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 1500,
