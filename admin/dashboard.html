@@ -526,7 +526,6 @@ const ADMIN_PASS = 'ala2025admin'; // Cambia esto
 const ADMIN_EMAIL = 'angie.lpz08@gmail.com'; // Email del admin
 // Resend.com API key (obtener gratis en resend.com → API Keys)
 const RESEND_KEY = 're_1Q5Y69fk_PhFt5wxefXmM6d4kD3KQRkth';
-const AK = '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';
 
 let currentPage = 'dashboard';
 let editingJobId = null;
@@ -785,9 +784,9 @@ async function runAI() {
   document.getElementById('aiActions').style.display = 'flex';
 
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch('/.netlify/functions/ai-proxy', {
       method: 'POST',
-      headers: {'Content-Type':'application/json','x-api-key':AK,'anthropic-version':'2023-06-01'},
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 1500,
