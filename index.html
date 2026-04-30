@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Angie Lopez Agency — Fotografía & Marketing | Santo Domingo, RD</title>
+<meta name="description" content="Fotografía profesional, marketing digital y construcción de marcas en Santo Domingo, RD. Event Photographer · Corporate & Family · @angielopez.ph">
+<meta name="theme-color" content="#FF6B8A">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23FF6B8A'/><text y='.9em' font-size='48' x='50%' text-anchor='middle' font-family='Georgia,serif' font-weight='900' fill='white'>ALA</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0F0F14;--bg2:#1A1A24;--w:#fff;--mu:#8B8B96;
+  --pk:#FF6B8A;--pkd:#E63E6D;--pkk:#C4305A;
+  --or:#FF9F1C;--pu:#7B2FBE;
+  --gb:rgba(255,107,138,.22);--r:8px
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--bg);color:var(--w);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--pk)}
+a{color:inherit;text-decoration:none}
+
+/* PROGRESS */
+#pb{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--pkk),var(--pk),var(--or));z-index:9999;width:0;pointer-events:none;transition:width .1s}
+
+/* TOPBAR */
+#tb{background:linear-gradient(90deg,var(--pkk),var(--pu),var(--pkd));padding:8px 5%;display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:901}
+#tb span{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.14em;color:rgba(255,255,255,.9);text-transform:uppercase}
+#tb a{font-family:'DM Mono',monospace;font-size:.62rem;color:#fff;background:rgba(255,255,255,.18);padding:5px 13px;border-radius:20px;border:1px solid rgba(255,255,255,.28)}
+.tbc{background:none;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:1rem;margin-left:4px}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:900;background:rgba(15,15,20,.97);border-bottom:1px solid var(--gb);backdrop-filter:blur(20px);padding:0 5%}
+.ni{display:flex;align-items:center;justify-content:space-between;height:60px;gap:10px}
+.la{display:flex;align-items:center;gap:9px;flex-shrink:0}
+.lt{font-family:'Playfair Display',serif;font-size:clamp(.95rem,1.8vw,1.2rem);font-weight:700;color:var(--w)}
+.ls{font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.2em;color:var(--or);text-transform:uppercase;margin-top:2px}
+.nl{display:flex;gap:clamp(12px,2vw,28px);list-style:none}
+.nl a{font-size:.78rem;color:var(--mu);transition:color .2s}
+.nl a:hover{color:var(--w)}
+.nr{display:flex;align-items:center;gap:9px;flex-shrink:0}
+.lw{position:relative}
+.lb{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.05);border:1px solid var(--gb);color:var(--or);padding:6px 11px;cursor:pointer;font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;border-radius:var(--r)}
+.ldd{position:absolute;top:calc(100% + 6px);right:0;background:var(--bg2);border:1px solid var(--gb);min-width:144px;display:none;flex-direction:column;border-radius:var(--r);overflow:hidden;box-shadow:0 16px 40px rgba(0,0,0,.5);z-index:999}
+.lw.open .ldd{display:flex}
+.lo{padding:9px 13px;font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);cursor:pointer;background:none;border:none;text-align:left;display:flex;align-items:center;gap:8px;transition:all .18s;width:100%}
+.lo:hover,.lo.active{background:rgba(255,107,138,.08);color:var(--pk)}
+.nc{background:linear-gradient(90deg,var(--pkd),var(--pk));color:#fff;padding:8px 16px;font-size:.73rem;font-weight:500;border-radius:var(--r);white-space:nowrap;transition:all .2s;display:inline-block}
+.nc:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(255,107,138,.35)}
+.hm{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hm span{display:block;width:22px;height:2px;background:var(--w);transition:all .3s;border-radius:2px}
+.hm.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hm.open span:nth-child(2){opacity:0}
+.hm.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* MOB NAV */
+.mn{position:fixed;inset:0;background:var(--bg);z-index:890;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;transform:translateX(100%);transition:transform .35s ease}
+.mn.open{transform:none}
+.mn a{font-family:'Playfair Display',serif;font-size:1.9rem;color:var(--w);transition:color .2s}
+.mn a:hover{color:var(--pk)}
+.mlw{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.ml{background:none;border:1px solid var(--gb);color:var(--mu);padding:6px 11px;cursor:pointer;font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;border-radius:var(--r);transition:all .18s}
+.ml.active{border-color:var(--pk);color:var(--pk)}
+
+/* HERO */
+#hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(60px,8vw,100px) 5% clamp(40px,5vw,64px);position:relative;overflow:hidden}
+.hbg{position:absolute;inset:0;background:linear-gradient(160deg,#180b20 0%,var(--bg) 45%,#0a0f1a 100%)}
+.hg1{position:absolute;width:55vw;height:55vw;border-radius:50%;background:radial-gradient(circle,rgba(255,107,138,.15),transparent 70%);top:-10%;right:-5%;pointer-events:none}
+.hg2{position:absolute;width:35vw;height:35vw;border-radius:50%;background:radial-gradient(circle,rgba(123,47,190,.1),transparent 70%);bottom:0;left:0;pointer-events:none}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,107,138,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,107,138,.04) 1px,transparent 1px);background-size:56px 56px;pointer-events:none}
+.badge{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(90deg,rgba(255,107,138,.12),rgba(255,159,28,.08));border:1px solid rgba(255,107,138,.3);padding:6px 13px;border-radius:999px;font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.17em;color:var(--pk);text-transform:uppercase;margin-bottom:16px;position:relative}
+.bd{width:6px;height:6px;background:var(--pk);border-radius:50%;animation:pulse 1.5s infinite;flex-shrink:0}
+.ey{position:relative;font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.26em;color:var(--or);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:13px}
+.ey::before{content:'';width:24px;height:1px;background:var(--or)}
+h1{position:relative;font-family:'Playfair Display',serif;font-size:clamp(2.8rem,8vw,8rem);line-height:.92;font-weight:900}
+h1 em{color:var(--pk);font-style:italic}
+h1 .out{-webkit-text-stroke:1px rgba(255,255,255,.2);color:transparent}
+.hd{position:relative;font-size:clamp(.88rem,1.5vw,1.08rem);font-weight:300;color:rgba(255,255,255,.5);max-width:440px;line-height:1.75;margin-top:20px}
+.hb{position:relative;display:flex;gap:11px;flex-wrap:wrap;margin-top:30px}
+.bp{background:linear-gradient(90deg,var(--pkd),var(--pk));color:#fff;padding:13px 30px;font-size:.83rem;font-weight:500;border-radius:var(--r);transition:all .3s;box-shadow:0 4px 18px rgba(255,107,138,.33);display:inline-block}
+.bp:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(255,107,138,.48)}
+.bg{border:1px solid rgba(255,255,255,.17);color:var(--w);padding:13px 30px;font-size:.83rem;font-weight:300;border-radius:var(--r);transition:all .3s;display:inline-block}
+.bg:hover{border-color:var(--pk);color:var(--pk)}
+.hss{position:relative;display:flex;gap:clamp(16px,3.5vw,48px);margin-top:44px;flex-wrap:wrap}
+.hsi{border-left:1px solid rgba(255,107,138,.3);padding-left:14px}
+.hsn{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,2rem);background:linear-gradient(90deg,var(--pk),var(--or));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.hsl{font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.16em;color:var(--mu);text-transform:uppercase;margin-top:3px}
+
+/* TICKER */
+.tkw{border-top:1px solid rgba(255,107,138,.17);border-bottom:1px solid rgba(255,107,138,.17);padding:10px 0;overflow:hidden;background:rgba(255,107,138,.03)}
+.tkt{display:flex;gap:52px;white-space:nowrap;animation:ticker 28s linear infinite;width:max-content}
+.tki{font-family:'DM Mono',monospace;font-size:.61rem;letter-spacing:.19em;color:var(--mu);text-transform:uppercase;display:flex;align-items:center;gap:16px}
+.tkd{width:4px;height:4px;background:var(--pk);border-radius:50%;flex-shrink:0}
+
+/* SECTIONS */
+section{padding:clamp(52px,8.5vw,105px) 5%}
+.stg{font-family:'DM Mono',monospace;font-size:.59rem;letter-spacing:.26em;color:var(--or);text-transform:uppercase;margin-bottom:13px;display:flex;align-items:center;gap:9px}
+.stg::before{content:'';width:16px;height:1px;background:var(--or)}
+h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,3.6rem);line-height:.95;margin-bottom:14px}
+h2 em{color:var(--pk);font-style:italic}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease}
+.rv.vis{opacity:1;transform:none}
+
+/* SERVICES */
+.si{font-size:clamp(.86rem,1.4vw,1rem);font-weight:300;color:rgba(255,255,255,.44);max-width:460px;line-height:1.75;margin-bottom:clamp(28px,4.5vw,56px)}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,265px),1fr));gap:1px;background:rgba(255,107,138,.17)}
+.sc{background:var(--bg);padding:clamp(20px,3vw,36px) clamp(16px,2.5vw,28px);position:relative;overflow:hidden;transition:background .3s}
+.sc::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,107,138,.06),transparent 60%);opacity:0;transition:opacity .3s}
+.sc:hover::before{opacity:1}
+.sc:hover{background:rgba(255,107,138,.03)}
+.scn{font-family:'Playfair Display',serif;font-size:2rem;color:rgba(255,107,138,.1);line-height:1;margin-bottom:14px;transition:color .3s}
+.sc:hover .scn{color:rgba(255,107,138,.24)}
+.sci{font-size:1.25rem;margin-bottom:10px}
+.scnm{font-family:'Playfair Display',serif;font-size:1.08rem;font-weight:700;margin-bottom:7px}
+.scd{font-size:.82rem;color:var(--mu);line-height:1.7;font-weight:300}
+.scf{background:linear-gradient(135deg,rgba(255,107,138,.09),rgba(255,159,28,.06));border:1px solid rgba(255,107,138,.27)}
+.scf .scn{color:rgba(255,107,138,.33)}
+.scf .scnm{color:var(--pk)}
+.sct{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px}
+.sctg{font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.09em;border:1px solid rgba(255,107,138,.17);padding:3px 8px;text-transform:uppercase;color:var(--mu);border-radius:4px}
+
+/* FOTO */
+#foto{background:linear-gradient(180deg,#18182a,var(--bg2))}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4.5vw,66px);align-items:center}
+.fgl{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.ft{overflow:hidden;position:relative;border-radius:var(--r)}
+.ft:nth-child(1){grid-column:1;grid-row:1/3}
+.fti{width:100%;min-height:90px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;transition:transform .5s;height:100%}
+.ft:hover .fti{transform:scale(1.06)}
+.ft1{background:linear-gradient(135deg,#2d1520,#4a2535)}
+.ft2{background:linear-gradient(135deg,#18152a,#2d2050)}
+.ft3{background:linear-gradient(135deg,#15201a,#20402d)}
+.ft4{background:linear-gradient(135deg,#1a1810,#302c18)}
+.ftl{position:absolute;bottom:0;left:0;right:0;padding:7px 10px;background:linear-gradient(to top,rgba(0,0,0,.7),transparent);font-size:.6rem;font-family:'DM Mono',monospace;letter-spacing:.11em;text-transform:uppercase;color:rgba(255,255,255,.85);opacity:0;transition:opacity .3s;border-radius:0 0 var(--r) var(--r)}
+.ft:hover .ftl{opacity:1}
+.fc h2{font-size:clamp(1.7rem,3vw,3rem);line-height:.95;margin-bottom:13px}
+.fc p{font-size:clamp(.82rem,1.3vw,.94rem);font-weight:300;color:rgba(255,255,255,.46);line-height:1.75;margin-bottom:16px}
+.fty{display:flex;flex-direction:column;gap:7px;margin-top:14px}
+.ftype{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid rgba(255,107,138,.13);border-radius:var(--r);transition:all .3s}
+.ftype:hover{border-color:rgba(255,107,138,.36);background:rgba(255,107,138,.04)}
+.ftic{font-size:1.05rem;flex-shrink:0}
+.ftnm{font-weight:500;font-size:.84rem}
+.ftpr{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--or);letter-spacing:.08em;margin-top:2px}
+
+/* INSTAGRAM */
+#ig{background:var(--bg)}
+.igw{display:grid;grid-template-columns:240px 1fr;gap:24px;align-items:start}
+.igc{background:var(--bg2);border:1px solid var(--gb);border-radius:16px;overflow:hidden}
+.igh{padding:15px;display:flex;align-items:center;gap:11px;border-bottom:1px solid var(--gb)}
+.igav{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1rem;flex-shrink:0;font-family:'Playfair Display',serif}
+.ighd{font-weight:700;font-size:.88rem;color:var(--w)}
+.ign2{font-size:.72rem;color:var(--mu);margin-top:2px}
+.igfl{margin-left:auto;background:#0095f6;color:#fff;border:none;border-radius:7px;padding:6px 13px;font-size:.7rem;font-weight:600;cursor:pointer;flex-shrink:0}
+.igst{display:flex;padding:10px;border-bottom:1px solid var(--gb)}
+.igsti{flex:1;text-align:center}
+.igsn{font-size:.95rem;font-weight:700;color:var(--w)}
+.igsl2{font-size:.6rem;color:var(--mu)}
+.igb{padding:10px 13px;border-bottom:1px solid var(--gb)}
+.igb p{font-size:.76rem;color:rgba(255,255,255,.6);line-height:1.55}
+.igb strong{color:var(--w);font-weight:600}
+.igg{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:2px}
+.igt{aspect-ratio:1;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:opacity .2s;border-radius:5px;position:relative;overflow:hidden}
+.igt:hover{opacity:.82}
+.igtl{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);color:#fff;font-size:.54rem;padding:4px 5px;opacity:0;transition:opacity .2s;font-family:'DM Mono',monospace;letter-spacing:.07em;text-transform:uppercase;text-align:center}
+.igt:hover .igtl{opacity:1}
+.c1{background:#e8d5c4}.c2{background:#c4d4e8}.c3{background:#d4e8c4}
+.c4{background:#e8c4d4}.c5{background:#c4e8e4}.c6{background:#e4e8c4}
+.c7{background:#dcc4e8}.c8{background:#e8dcc4}.c9{background:#c4dce8}
+.igct{padding:10px 13px;text-align:center;border-top:1px solid var(--gb)}
+.igct a{font-size:.7rem;color:#0095f6;font-weight:600}
+.igco{display:flex;flex-direction:column;gap:20px}
+.ight{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,2.8vw,2.2rem);line-height:1}
+.ight em{color:var(--pk);font-style:italic}
+.igd{font-size:.88rem;font-weight:300;color:rgba(255,255,255,.46);line-height:1.75;max-width:440px}
+
+
+
+
+
+
+.igcl{background:linear-gradient(135deg,rgba(255,107,138,.1),rgba(255,159,28,.06));border:1px solid rgba(255,107,138,.27);border-radius:var(--r);padding:14px}
+.igclt{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:6px}
+.igcld{font-size:.8rem;color:rgba(255,255,255,.56);line-height:1.6;margin-bottom:12px}
+.igclb{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(90deg,var(--pkd),var(--pk));color:#fff;padding:9px 18px;border-radius:var(--r);font-size:.74rem;font-weight:500;transition:all .3s}
+.igclb:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(255,107,138,.4)}
+
+/* SECTORES */
+.mkg{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,185px),1fr));gap:1px;background:rgba(255,107,138,.13);margin-top:clamp(24px,3.5vw,44px)}
+.mkc{background:var(--bg);padding:20px 16px;text-align:center;transition:all .3s;border:1px solid transparent}
+.mkc:hover{background:rgba(255,107,138,.05);border-color:rgba(255,107,138,.19)}
+.mkico{font-size:1.55rem;margin-bottom:7px}
+.mks{font-family:'DM Mono',monospace;font-size:.53rem;letter-spacing:.17em;text-transform:uppercase;color:var(--or);margin-bottom:4px}
+.mkn{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;margin-bottom:4px}
+.mkd{font-size:.74rem;color:var(--mu);line-height:1.55}
+
+/* PROCESO */
+#pro{background:linear-gradient(180deg,var(--bg2),#18182a)}
+.pg{display:grid;gap:1px;background:rgba(255,107,138,.13);margin-top:clamp(24px,3.5vw,44px)}
+.paso{background:var(--bg2);padding:clamp(18px,3vw,34px);display:grid;grid-template-columns:50px 1fr;gap:clamp(14px,2vw,28px);align-items:start;transition:background .3s}
+.paso:hover{background:rgba(255,107,138,.04)}
+.pasn{font-family:'Playfair Display',serif;font-size:2.4rem;color:rgba(255,107,138,.17);line-height:1;padding-top:3px}
+.past{font-family:'Playfair Display',serif;font-size:clamp(.96rem,1.7vw,1.2rem);font-weight:700;margin-bottom:5px}
+.pasd{font-size:.82rem;color:var(--mu);line-height:1.7;max-width:560px}
+
+/* PLANES */
+.pli{font-size:clamp(.84rem,1.3vw,.94rem);color:rgba(255,255,255,.43);max-width:480px;line-height:1.7;margin-bottom:clamp(24px,3.5vw,44px)}
+.plg{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,255px),1fr));gap:1px;background:rgba(255,107,138,.17)}
+.plan{background:var(--bg);padding:clamp(22px,3vw,38px) clamp(18px,2.5vw,30px);position:relative;transition:background .3s}
+.plan:hover:not(.pf){background:rgba(255,107,138,.03)}
+.plb{position:absolute;top:15px;right:15px;font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.11em;background:var(--pkk);color:#fff;padding:3px 8px;text-transform:uppercase;border-radius:4px}
+.pf{background:linear-gradient(135deg,var(--pkk),var(--pk))}
+.pln{font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:5px;color:var(--mu)}
+.pf .pln{color:rgba(255,255,255,.76)}
+.plp{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;line-height:1;margin:14px 0 3px}
+.plc{font-family:'DM Mono',monospace;font-size:.63rem;vertical-align:super;margin-right:3px;color:var(--mu)}
+.pf .plc{color:rgba(255,255,255,.66)}
+.plpe{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.11em;color:var(--mu);text-transform:uppercase;margin-bottom:20px}
+.pf .plpe{color:rgba(255,255,255,.58)}
+.plf{list-style:none;display:flex;flex-direction:column}
+.plf li{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.82rem;display:flex;align-items:flex-start;gap:8px;font-weight:300;line-height:1.4}
+.pf .plf li{border-bottom-color:rgba(255,255,255,.13)}
+.plf li::before{content:'→';color:var(--or);font-size:.68rem;flex-shrink:0;margin-top:1px}
+.pf .plf li::before{color:rgba(255,255,255,.86)}
+.plbt{display:block;margin-top:20px;padding:11px;text-align:center;font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;border:1px solid rgba(255,107,138,.2);color:var(--w);border-radius:var(--r);transition:all .3s;cursor:pointer;background:none;width:100%}
+.plbt:hover{background:var(--pk);color:#fff;border-color:var(--pk)}
+.pf .plbt{background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.26)}
+.pf .plbt:hover{background:#fff;color:var(--pkk)}
+.plnt{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.08em;color:var(--mu);margin-top:28px;text-align:center;line-height:1.75}
+.pptl{font-family:'Playfair Display',serif;font-size:clamp(1.2rem,2.3vw,1.7rem);margin:44px 0 18px}
+.pptl em{color:var(--pk);font-style:italic}
+.ppg{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,205px),1fr));gap:1px;background:rgba(255,107,138,.17)}
+.ppc{background:var(--bg);padding:22px 18px;transition:background .3s}
+.ppc:hover{background:rgba(255,107,138,.04)}
+.ppn{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pk);margin-bottom:5px}
+.ppp{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:700;margin-bottom:3px}
+.ppd{font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.09em;color:var(--mu);text-transform:uppercase;margin-bottom:11px}
+.ppf{list-style:none;display:flex;flex-direction:column;gap:6px}
+.ppf li{font-size:.76rem;color:var(--mu);display:flex;gap:7px;line-height:1.4}
+.ppf li::before{content:'✓';color:var(--pk);flex-shrink:0}
+
+/* TESTIMONIOS */
+#tst{background:linear-gradient(180deg,#18182a,var(--bg2))}
+.tg{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:1px;background:rgba(255,107,138,.13);margin-top:clamp(24px,3.5vw,44px)}
+.tc{background:var(--bg2);padding:clamp(18px,3vw,30px);transition:background .3s}
+.tc:hover{background:rgba(255,107,138,.04)}
+.tcs{color:var(--pk);font-size:.7rem;margin-bottom:11px;letter-spacing:2px}
+.tcq{font-family:'Playfair Display',serif;font-size:clamp(.86rem,1.4vw,1rem);font-style:italic;line-height:1.65;color:rgba(255,255,255,.8);margin-bottom:14px}
+.tca{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.13em;color:var(--or);text-transform:uppercase}
+.tcr{font-size:.74rem;color:var(--mu);margin-top:2px}
+
+/* CONTACTO */
+#cont{position:relative;overflow:hidden}
+.cgw{position:absolute;width:380px;height:380px;background:radial-gradient(circle,rgba(196,123,110,.07),transparent 70%);left:-70px;bottom:-70px;pointer-events:none}
+.cgg{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,4.5vw,66px)}
+.ci h2{font-size:clamp(1.8rem,4vw,3.5rem);line-height:.93;margin-bottom:14px}
+.ci p{font-size:clamp(.82rem,1.3vw,.94rem);font-weight:300;color:rgba(255,255,255,.42);line-height:1.75;margin-bottom:24px}
+.chs{display:flex;flex-direction:column;gap:9px}
+.ch{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid rgba(255,107,138,.13);border-radius:var(--r);transition:all .3s;cursor:pointer}
+.ch:hover{border-color:var(--pk);background:rgba(255,107,138,.05)}
+.chi{font-size:1.05rem;flex-shrink:0}
+.chl{font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.14em;color:var(--or);text-transform:uppercase}
+.chv{font-size:.82rem;margin-top:2px}
+.fs{display:flex;flex-direction:column;gap:11px}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.fg2{display:flex;flex-direction:column;gap:5px}
+.fl{font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.14em;color:var(--mu);text-transform:uppercase}
+.fin,.fse,.fta{background:rgba(255,255,255,.05);border:1px solid rgba(255,107,138,.17);color:var(--w);padding:10px 13px;font-family:'DM Sans',sans-serif;font-size:.86rem;outline:none;transition:border-color .3s;border-radius:var(--r);-webkit-appearance:none;width:100%}
+.fin:focus,.fse:focus,.fta:focus{border-color:var(--pk)}
+.fin::placeholder,.fta::placeholder{color:var(--mu)}
+.fta{resize:vertical;min-height:92px}
+.fse option{background:var(--bg)}
+.fsb{background:linear-gradient(90deg,var(--pkd),var(--pk));color:#fff;border:none;padding:12px 34px;font-size:.82rem;font-weight:500;cursor:pointer;align-self:flex-start;border-radius:var(--r);transition:all .3s}
+.fsb:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(255,107,138,.38)}
+
+/* CHAT */
+#cw{position:fixed;bottom:22px;right:22px;z-index:800}
+#cb{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--pkd),var(--pk));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 8px 26px rgba(255,107,138,.43);transition:all .3s;position:relative}
+#cb:hover{transform:scale(1.08);box-shadow:0 12px 38px rgba(255,107,138,.58)}
+.cpls{position:absolute;top:3px;right:3px;width:10px;height:10px;background:#4ade80;border-radius:50%;border:2px solid var(--bg);animation:pulse 2s infinite}
+#cp{position:absolute;bottom:64px;right:0;width:min(338px,91vw);background:var(--bg2);border:1px solid rgba(255,107,138,.24);box-shadow:0 20px 56px rgba(0,0,0,.6);display:none;flex-direction:column;border-radius:13px;overflow:hidden}
+#cp.open{display:flex;animation:co .28s ease}
+.chd{background:linear-gradient(90deg,var(--pkk),var(--pk));padding:13px 15px;display:flex;align-items:center;gap:10px}
+.chav{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.chnm{font-family:'Playfair Display',serif;font-size:.92rem;font-weight:700;color:#fff}
+.chst{font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.09em;color:rgba(255,255,255,.8)}
+#cms{flex:1;min-height:235px;max-height:235px;overflow-y:auto;padding:11px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
+#cms::-webkit-scrollbar{width:2px}
+#cms::-webkit-scrollbar-thumb{background:var(--pk)}
+.msg{max-width:85%;padding:8px 12px;font-size:.8rem;line-height:1.5;border-radius:10px;word-break:break-word;animation:fadein .2s ease}
+.msg.bot{background:rgba(255,107,138,.1);border:1px solid rgba(255,107,138,.17);color:var(--w);align-self:flex-start;border-radius:3px 10px 10px 10px}
+.msg.user{background:linear-gradient(135deg,var(--pkk),var(--pk));color:#fff;align-self:flex-end;border-radius:10px 3px 10px 10px}
+.msg a{color:var(--or);text-decoration:underline}
+.msg strong{font-weight:600}
+.qd{display:flex;gap:4px;align-items:center;padding:3px 0}
+.qd span{width:6px;height:6px;background:var(--pk);border-radius:50%;opacity:.3;animation:dot 1.2s infinite}
+.qd span:nth-child(2){animation-delay:.2s}
+.qd span:nth-child(3){animation-delay:.4s}
+.qrw{padding:7px 10px;display:flex;flex-wrap:wrap;gap:5px;border-top:1px solid rgba(255,107,138,.11);background:rgba(255,107,138,.03)}
+.qrb{background:rgba(255,107,138,.1);border:1px solid rgba(255,107,138,.23);color:var(--pk);padding:4px 9px;border-radius:16px;font-size:.7rem;cursor:pointer;white-space:nowrap;transition:all .16s;font-family:'DM Sans',sans-serif}
+.qrb:hover{background:rgba(255,107,138,.2);border-color:var(--pk)}
+.ciw{padding:9px 10px;border-top:1px solid rgba(255,107,138,.12);display:flex;gap:6px;background:var(--bg2)}
+#ci{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,107,138,.15);color:var(--w);padding:8px 11px;font-family:'DM Sans',sans-serif;font-size:.8rem;outline:none;border-radius:var(--r);transition:border-color .2s}
+#ci:focus{border-color:var(--pk)}
+#ci::placeholder{color:var(--mu)}
+#ci:disabled{opacity:.53}
+#cs{background:linear-gradient(135deg,var(--pkd),var(--pk));color:#fff;border:none;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:.88rem;transition:all .18s;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+#cs:hover:not(:disabled){transform:scale(1.08);box-shadow:0 4px 13px rgba(255,107,138,.38)}
+#cs:disabled{opacity:.43;cursor:not-allowed;transform:none}
+.cft{padding:5px 10px;background:rgba(255,107,138,.03);border-top:1px solid rgba(255,107,138,.1);display:flex;align-items:center;justify-content:space-between}
+.cfl{font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.08em;color:var(--mu)}
+.cfw{font-family:'DM Mono',monospace;font-size:.5rem;color:#4ade80}
+
+/* FLOATING */
+.waf{position:fixed;bottom:84px;right:22px;z-index:700;display:flex;flex-direction:column;align-items:center;gap:3px}
+.waf a{width:44px;height:44px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.15rem;box-shadow:0 4px 15px rgba(37,211,102,.38);transition:all .3s}
+.waf a:hover{transform:scale(1.1)}
+.wafl{font-family:'DM Mono',monospace;font-size:.45rem;letter-spacing:.08em;color:var(--mu);text-transform:uppercase}
+#btt{position:fixed;bottom:22px;left:22px;z-index:700;width:36px;height:36px;background:rgba(255,255,255,.07);border:1px solid rgba(255,107,138,.17);color:var(--mu);font-size:.82rem;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:50%;opacity:0;transition:all .3s;backdrop-filter:blur(8px)}
+#btt.vis{opacity:1}
+#btt:hover{background:var(--pk);color:#fff;border-color:var(--pk)}
+
+/* FOOTER */
+footer{background:#070709;border-top:1px solid rgba(255,107,138,.12);padding:clamp(40px,6.5vw,66px) 5% clamp(24px,3vw,32px)}
+.ftt{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:clamp(16px,2.5vw,32px);margin-bottom:clamp(30px,4.5vw,46px)}
+.flo{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.flo span{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700}
+.ftg{font-size:.8rem;color:var(--mu);line-height:1.65;font-style:italic}
+.fcc h4{font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.2em;color:var(--or);text-transform:uppercase;margin-bottom:13px}
+.fcc ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.fcc li a{color:var(--mu);font-size:.8rem;transition:color .2s}
+.fcc li a:hover{color:var(--w)}
+.fb{border-top:1px solid rgba(255,255,255,.05);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:11px}
+.fleg{font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.08em;color:var(--mu)}
+.fso{display:flex;gap:8px}
+.sl{width:30px;height:30px;border:1px solid rgba(255,107,138,.17);display:flex;align-items:center;justify-content:center;color:var(--mu);font-size:.7rem;border-radius:var(--r);transition:all .3s}
+.sl:hover{border-color:var(--pk);color:var(--pk)}
+
+
+/* COTIZADOR */
+#cotizador{background:linear-gradient(180deg,var(--bg2),var(--bg))}
+.quiz-wrap{max-width:620px;margin:0 auto}
+.quiz-step{display:none;animation:fadein .3s ease}
+.quiz-step.active{display:block}
+.quiz-q{font-family:'Playfair Display',serif;font-size:clamp(1.1rem,2.5vw,1.6rem);font-weight:700;margin-bottom:6px;line-height:1.2}
+.quiz-sub{font-size:.86rem;color:var(--mu);margin-bottom:22px;line-height:1.6}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.quiz-opt{background:rgba(255,255,255,.04);border:1px solid rgba(255,107,138,.18);border-radius:10px;padding:14px 16px;cursor:pointer;transition:all .2s;text-align:left;display:flex;align-items:center;gap:11px}
+.quiz-opt:hover{border-color:var(--pk);background:rgba(255,107,138,.07)}
+.quiz-opt.selected{border-color:var(--pk);background:rgba(255,107,138,.12)}
+.quiz-opt .opt-ico{font-size:1.3rem;flex-shrink:0}
+.quiz-opt .opt-txt{font-size:.86rem;font-weight:500}
+.quiz-opt .opt-sub{font-size:.74rem;color:var(--mu);margin-top:2px}
+.quiz-nav{display:flex;gap:10px;align-items:center;margin-top:6px}
+.quiz-back{background:none;border:1px solid rgba(255,255,255,.12);color:var(--mu);padding:9px 18px;border-radius:var(--r);font-size:.82rem;cursor:pointer;transition:all .2s}
+.quiz-back:hover{border-color:var(--pk);color:var(--pk)}
+.quiz-prog{flex:1;background:rgba(255,255,255,.07);border-radius:99px;height:5px;overflow:hidden}
+.quiz-prog-bar{background:linear-gradient(90deg,var(--pkd),var(--pk));height:100%;border-radius:99px;transition:width .4s ease}
+.quiz-result{background:linear-gradient(135deg,rgba(255,107,138,.1),rgba(255,159,28,.06));border:1px solid rgba(255,107,138,.28);border-radius:14px;padding:24px}
+.quiz-result-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:6px}
+.quiz-result-pkg{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.16em;color:var(--or);text-transform:uppercase;margin-bottom:14px}
+.quiz-result-price{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--pk);margin-bottom:4px}
+.quiz-result-desc{font-size:.86rem;color:rgba(255,255,255,.6);line-height:1.65;margin-bottom:18px}
+.quiz-result-items{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+.quiz-result-items li{font-size:.84rem;display:flex;gap:8px;align-items:flex-start}
+.quiz-result-items li::before{content:'→';color:var(--or);flex-shrink:0}
+
+/* ANIMATIONS */
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.33)}}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes co{from{opacity:0;transform:translateY(13px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes dot{0%,80%,100%{opacity:.2;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+@keyframes fadein{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .nl,.nc{display:none}
+  .hm{display:flex}
+  .fg,.cgg{grid-template-columns:1fr}
+  .fgl{order:2}.fc{order:1}
+  .ftt{grid-template-columns:1fr 1fr}
+  .igw{grid-template-columns:1fr}
+  
+}
+@media(max-width:620px){
+  .fr{grid-template-columns:1fr}
+  .ftt{grid-template-columns:1fr}
+  .fb{flex-direction:column;align-items:flex-start}
+  .hss{gap:13px}
+  .ppg{grid-template-columns:1fr 1fr}
+  #tb{flex-direction:column;gap:6px;padding:7px 4%}
+}
+</style>
+</head>
+<body>
+
+<div id="pb"></div>
+
+<!-- TOPBAR -->
+<div id="tb">
+  <span data-i18n="ann">✨ Consulta gratuita · Escríbenos hoy</span>
+  <a href="https://wa.me/18097071943" target="_blank">📲 WhatsApp</a>
+  <button class="tbc" onclick="this.parentElement.style.display='none'">✕</button>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="ni">
+    <a href="#hero" class="la">
+      <svg width="36" height="36" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#FF6B8A"/><stop offset="100%" style="stop-color:#FF9F1C"/></linearGradient></defs>
+        <rect width="44" height="44" rx="11" fill="url(#lg)"/>
+        <rect x="7" y="18" width="30" height="19" rx="4" fill="white" opacity=".95"/>
+        <circle cx="22" cy="27" r="6.5" fill="url(#lg)"/>
+        <circle cx="22" cy="27" r="4" fill="white" opacity=".3"/>
+        <circle cx="22" cy="27" r="2.2" fill="white" opacity=".9"/>
+        <rect x="16" y="13" width="9" height="5" rx="2" fill="white" opacity=".85"/>
+        <circle cx="33" cy="21" r="1.8" fill="url(#lg)" opacity=".8"/>
+      </svg>
+      <div>
+        <div class="lt">Angie Lopez</div>
+        <div class="ls" data-i18n="ls">Fotografía · Marketing · Marcas</div>
+      </div>
+    </a>
+    <ul class="nl">
+      <li><a href="#svc" data-i18n="ns">Servicios</a></li>
+      <li><a href="#foto" data-i18n="nf">Fotografía</a></li>
+      <li><a href="#ig" data-i18n="nig">Instagram</a></li>
+      <li><a href="#planes" data-i18n="np">Planes</a></li>
+      <li><a href="#cont" data-i18n="nc2">Contacto</a></li>
+      <li><a href="admin/dashboard.html" style="color:var(--pk);font-weight:500">Portal →</a></li>
+    </ul>
+    <div class="nr">
+      <div class="lw" id="lw">
+        <button class="lb" onclick="tlw()"><span id="lf">🇩🇴</span><span id="lc">ES</span><span>▾</span></button>
+        <div class="ldd" id="ld">
+          <button class="lo active" onclick="sL('es')">🇩🇴 Español</button>
+          <button class="lo" onclick="sL('en')">🇺🇸 English</button>
+          <button class="lo" onclick="sL('fr')">🇫🇷 Français</button>
+          <button class="lo" onclick="sL('it')">🇮🇹 Italiano</button>
+          <button class="lo" onclick="sL('pt')">🇧🇷 Português</button>
+        </div>
+      </div>
+      <a href="#cont" class="nc" data-i18n="ncta">Iniciar Proyecto</a>
+      <button class="hm" id="hmbtn" onclick="tmob()"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mn" id="mobnav">
+  <a href="#svc" onclick="cmob()" data-i18n="ns">Servicios</a>
+  <a href="#foto" onclick="cmob()" data-i18n="nf">Fotografía</a>
+  <a href="#ig" onclick="cmob()" data-i18n="nig">Instagram</a>
+  <a href="#planes" onclick="cmob()" data-i18n="np">Planes</a>
+  <a href="#cont" onclick="cmob()" data-i18n="nc2">Contacto</a>
+  <a href="admin/dashboard.html" style="color:var(--pk)">Portal de Acceso →</a>
+  <div class="mlw">
+    <button class="ml active" onclick="sL('es');cmob()">🇩🇴 ES</button>
+    <button class="ml" onclick="sL('en');cmob()">🇺🇸 EN</button>
+    <button class="ml" onclick="sL('fr');cmob()">🇫🇷 FR</button>
+    <button class="ml" onclick="sL('it');cmob()">🇮🇹 IT</button>
+    <button class="ml" onclick="sL('pt');cmob()">🇧🇷 PT</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hbg"></div><div class="hg1"></div><div class="hg2"></div><div class="hgrid"></div>
+  <div class="badge" style="position:relative"><span class="bd"></span><span data-i18n="badge">Fotografía & Marketing · Santo Domingo RD</span></div>
+  <div class="ey" data-i18n="ey">Santo Domingo, RD · Alcance Global</div>
+  <h1><span data-i18n="h1a">Tu marca,</span><br><em data-i18n="h1b">irresistible</em><br><span class="out" data-i18n="h1c">al mundo.</span></h1>
+  <p class="hd" data-i18n="hd">Fotografía de impacto, estrategia digital y construcción de marcas que dominan el mercado dominicano y trascienden fronteras.</p>
+  <div class="hb">
+    <a href="#cont" class="bp" data-i18n="hb1">Conversemos →</a>
+    <a href="#svc" class="bg" data-i18n="hb2">Ver Servicios</a>
+  </div>
+  <div class="hss">
+    <div class="hsi"><div class="hsn">+150</div><div class="hsl" data-i18n="s1">Marcas Transformadas</div></div>
+    <div class="hsi"><div class="hsn">8+</div><div class="hsl" data-i18n="s2">Años Experiencia</div></div>
+    <div class="hsi"><div class="hsn">1K+</div><div class="hsl" data-i18n="s3">Seguidores IG</div></div>
+    <div class="hsi"><div class="hsn">97%</div><div class="hsl" data-i18n="s4">Clientes Satisfechos</div></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="tkw"><div class="tkt">
+  <div class="tki"><span class="tkd"></span><span data-i18n="t1">Fotografía Profesional</span></div>
+  <div class="tki"><span class="tkd"></span><span data-i18n="t2">Gestión de Redes</span></div>
+  <div class="tki"><span class="tkd"></span><span data-i18n="t3">Construcción de Marcas</span></div>
+  <div class="tki"><span class="tkd"></span><span data-i18n="t4">Campañas Digitales</span></div>
+  <div class="tki"><span class="tkd"></span><span data-i18n="t5">Diseño de Identidad</span></div>
+  <div class="tki"><span class="tkd"></span><span data-i18n="t6">Fotografía de Productos</span></div>
+  <div class="tki"><span class="tkd"></span><span data-i18n="t7">Estrategia de Contenido</span></div>
+  <div class="tki"><span class="tkd"></span>Meta & Google Ads</div>
+  <div class="tki"><span class="tkd"></span><span data-i18n="t1">Fotografía Profesional</span></div>
+  <div class="tki"><span class="tkd"></span><span data-i18n="t2">Gestión de Redes</span></div>
+  <div class="tki"><span class="tkd"></span><span data-i18n="t3">Construcción de Marcas</span></div>
+  <div class="tki"><span class="tkd"></span><span data-i18n="t4">Campañas Digitales</span></div>
+  <div class="tki"><span class="tkd"></span><span data-i18n="t5">Diseño de Identidad</span></div>
+  <div class="tki"><span class="tkd"></span><span data-i18n="t6">Fotografía de Productos</span></div>
+  <div class="tki"><span class="tkd"></span><span data-i18n="t7">Estrategia de Contenido</span></div>
+  <div class="tki"><span class="tkd"></span>Meta & Google Ads</div>
+</div></div>
+
+<!-- SERVICIOS -->
+<section id="svc">
+  <div class="stg rv" data-i18n="stg1">Lo que hacemos</div>
+  <h2 class="rv"><span data-i18n="sh1">Todo lo que tu marca</span><br><em data-i18n="sh2">necesita crecer</em></h2>
+  <p class="si rv" data-i18n="sd">Desde la primera foto hasta la campaña global — somos el equipo creativo y estratégico que tu negocio dominicano necesita.</p>
+  <div class="sg rv">
+    <div class="sc scf"><div class="scn">★</div><div class="sci">📸</div><div class="scnm" data-i18n="s1n">Fotografía Profesional</div><p class="scd" data-i18n="s1d">Marca personal, productos, negocios, eventos y campañas. Imágenes que cuentan tu historia y venden por ti.</p><div class="sct"><span class="sctg" data-i18n="s1t1">Marca Personal</span><span class="sctg" data-i18n="s1t2">Productos</span><span class="sctg" data-i18n="s1t3">Eventos</span></div></div>
+    <div class="sc"><div class="scn">02</div><div class="sci">📱</div><div class="scnm" data-i18n="s2n">Gestión de Redes Sociales</div><p class="scd" data-i18n="s2d">Instagram, Facebook, TikTok y LinkedIn. Contenido, comunidad, crecimiento orgánico y paid media.</p></div>
+    <div class="sc"><div class="scn">03</div><div class="sci">🏛️</div><div class="scnm" data-i18n="s3n">Construcción de Marca</div><p class="scd" data-i18n="s3d">Identidad visual, manual de marca, naming y posicionamiento que hace tu negocio irresistible.</p></div>
+    <div class="sc"><div class="scn">04</div><div class="sci">🎯</div><div class="scnm" data-i18n="s4n">Campañas Publicitarias</div><p class="scd" data-i18n="s4d">Meta Ads, Google Ads y campañas digitales orientadas a resultados medibles.</p></div>
+    <div class="sc"><div class="scn">05</div><div class="sci">✍️</div><div class="scnm" data-i18n="s5n">Estrategia de Contenido</div><p class="scd" data-i18n="s5d">Calendarios editoriales, copywriting, guiones para Reels y todo el contenido que necesitas.</p></div>
+    <div class="sc"><div class="scn">06</div><div class="sci">🌐</div><div class="scnm" data-i18n="s6n">Sitios Web & E-commerce</div><p class="scd" data-i18n="s6d">Páginas web y tiendas online que convierten visitantes en clientes.</p></div>
+    <div class="sc"><div class="scn">07</div><div class="sci">🎬</div><div class="scnm" data-i18n="s7n">Video & Producción</div><p class="scd" data-i18n="s7d">Videos corporativos, Reels y comerciales que generan engagement real.</p></div>
+    <div class="sc"><div class="scn">08</div><div class="sci">🤝</div><div class="scnm" data-i18n="s8n">Influencer & PR Digital</div><p class="scd" data-i18n="s8d">Gestión de influencers en RD, PR digital y colaboraciones estratégicas.</p></div>
+    <div class="sc"><div class="scn">09</div><div class="sci">📊</div><div class="scnm" data-i18n="s9n">Consultoría Digital</div><p class="scd" data-i18n="s9d">Auditoría completa de tu presencia digital y plan personalizado para escalar.</p></div>
+  </div>
+</section>
+
+<!-- FOTOGRAFÍA -->
+<section id="foto">
+  <div class="fg">
+    <div class="fgl rv">
+      <div class="ft"><div class="fti ft1">📸</div><div class="ftl">Marca Personal</div></div>
+      <div class="ft"><div class="fti ft2">👔</div><div class="ftl">Corporativa</div></div>
+      <div class="ft"><div class="fti ft3">🛍️</div><div class="ftl">Productos</div></div>
+      <div class="ft"><div class="fti ft4">🏢</div><div class="ftl">Real Estate</div></div>
+    </div>
+    <div class="fc rv">
+      <div class="stg" data-i18n="ftg">Especialidad Principal</div>
+      <h2><span data-i18n="fh1">Fotografía que</span><br><em data-i18n="fh2">vende tu historia</em></h2>
+      <p data-i18n="fd">En el mercado dominicano, la imagen lo es todo. Negocios que invierten en fotografía profesional generan hasta 3x más engagement.</p>
+      <div class="fty">
+        <div class="ftype"><div class="ftic">🧑‍💼</div><div><div class="ftnm" data-i18n="fp1n">Marca Personal & Profesional</div><div class="ftpr" data-i18n="fp1p">Desde RD$8,000 — 10 fotos editadas</div></div></div>
+        <div class="ftype"><div class="ftic">🛍️</div><div><div class="ftnm" data-i18n="fp2n">Fotografía de Productos</div><div class="ftpr" data-i18n="fp2p">Desde RD$6,500 — pack de 15 imágenes</div></div></div>
+        <div class="ftype"><div class="ftic">🏢</div><div><div class="ftnm" data-i18n="fp3n">Corporativa & Eventos</div><div class="ftpr" data-i18n="fp3p">Desde RD$15,000 — cobertura completa</div></div></div>
+        <div class="ftype"><div class="ftic">🍽️</div><div><div class="ftnm" data-i18n="fp4n">Gastronomía & Lifestyle</div><div class="ftpr" data-i18n="fp4p">Desde RD$9,500 — menú completo</div></div></div>
+        <div class="ftype"><div class="ftic">🏖️</div><div><div class="ftnm" data-i18n="fp5n">Turismo, Hoteles & Real Estate</div><div class="ftpr" data-i18n="fp5p">Desde RD$20,000 — propiedad completa</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section id="ig">
+  <div class="stg rv" data-i18n="igtg">Nuestro Portafolio</div>
+  <h2 class="rv"><span data-i18n="igh1">Síguenos en</span><br><em>@angielopez.ph</em></h2>
+  <div class="igw rv">
+    <div class="igc">
+      <div class="igh">
+        <div class="igav">AL</div>
+        <div><div class="ighd">angielopez.ph</div><div class="ign2">Angie López · Creative Manager & Photos</div></div>
+        <button class="igfl" onclick="window.open('https://www.instagram.com/angielopez.ph/','_blank')" data-i18n="igflw">Seguir</button>
+      </div>
+      <div class="igst">
+        <div class="igsti"><div class="igsn">17</div><div class="igsl2" data-i18n="igp">posts</div></div>
+        <div class="igsti"><div class="igsn">1,076</div><div class="igsl2" data-i18n="igs">seguidores</div></div>
+        <div class="igsti"><div class="igsn">970</div><div class="igsl2" data-i18n="igsg">siguiendo</div></div>
+      </div>
+      <div class="igb">
+        <p><strong data-i18n="igbt">Photographer</strong> · <span data-i18n="igbs">Event · Corporate & Family</span><br>Santo Domingo | EN/ES<br><span data-i18n="igbd">Llevo tu marca con contenido premium y estratégico</span></p>
+      </div>
+      <div class="igg">
+        <div class="igt c1" onclick="window.open('https://www.instagram.com/angielopez.ph/','_blank')"><span style="font-size:1.5rem">👩</span><div class="igtl">Marca Personal</div></div>
+        <div class="igt c2" onclick="window.open('https://www.instagram.com/angielopez.ph/','_blank')"><span style="font-size:1.5rem">🕶️</span><div class="igtl">Lifestyle</div></div>
+        <div class="igt c3" onclick="window.open('https://www.instagram.com/angielopez.ph/','_blank')"><span style="font-size:1.5rem">🏔️</span><div class="igtl">Outdoor</div></div>
+        <div class="igt c4" onclick="window.open('https://www.instagram.com/angielopez.ph/','_blank')"><span style="font-size:1.5rem">👗</span><div class="igtl">Moda</div></div>
+        <div class="igt c5" onclick="window.open('https://www.instagram.com/angielopez.ph/','_blank')"><span style="font-size:1.5rem">💑</span><div class="igtl">Parejas</div></div>
+        <div class="igt c6" onclick="window.open('https://www.instagram.com/angielopez.ph/','_blank')"><span style="font-size:1.5rem">🎉</span><div class="igtl">Eventos</div></div>
+        <div class="igt c7" onclick="window.open('https://www.instagram.com/angielopez.ph/','_blank')"><span style="font-size:1.5rem">👔</span><div class="igtl">Corporativa</div></div>
+        <div class="igt c8" onclick="window.open('https://www.instagram.com/angielopez.ph/','_blank')"><span style="font-size:1.5rem">🌆</span><div class="igtl">Urbana</div></div>
+        <div class="igt c9" onclick="window.open('https://www.instagram.com/angielopez.ph/','_blank')"><span style="font-size:1.5rem">🥂</span><div class="igtl">Celebraciones</div></div>
+      </div>
+      <div class="igct"><a href="https://www.instagram.com/angielopez.ph/" target="_blank" data-i18n="igver">Ver portafolio completo en Instagram →</a></div>
+    </div>
+    <div class="igco">
+      <div>
+        <div class="stg" data-i18n="igstg">Portafolio Visual</div>
+        <h3 class="ight"><span data-i18n="ight1">El trabajo habla</span><br><em data-i18n="ight2">por sí mismo</em></h3>
+      </div>
+      <p class="igd" data-i18n="igd">Cada imagen es el resultado de entender profundamente la historia del cliente — su negocio, su audiencia y el mensaje que necesita comunicar.</p>
+      <div class="igcl">
+        <div class="igclt" data-i18n="igclt">¿Quieres ver más del portafolio?</div>
+        <p class="igcld" data-i18n="igcld">Síguenos en Instagram para ver nuestro trabajo más reciente y casos de éxito de clientes dominicanos.</p>
+        <a href="https://www.instagram.com/angielopez.ph/" target="_blank" class="igclb">📸 <span data-i18n="igclb">Seguir @angielopez.ph</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="pro">
+  <div class="stg rv" data-i18n="prtg">Cómo trabajamos</div>
+  <h2 class="rv"><em data-i18n="prh1">Nuestro proceso</em><br><span data-i18n="prh2">paso a paso</span></h2>
+  <div class="pg rv">
+    <div class="paso"><div class="pasn">01</div><div><div class="past" data-i18n="pr1t">Consulta Gratuita</div><p class="pasd" data-i18n="pr1d">Conversamos por WhatsApp o en persona para entender tu negocio y metas. Sin compromisos.</p></div></div>
+    <div class="paso"><div class="pasn">02</div><div><div class="past" data-i18n="pr2t">Diagnóstico & Propuesta</div><p class="pasd" data-i18n="pr2d">Analizamos tu presencia y competencia en RD. Propuesta personalizada con estrategia y precios claros.</p></div></div>
+    <div class="paso"><div class="pasn">03</div><div><div class="past" data-i18n="pr3t">Producción & Ejecución</div><p class="pasd" data-i18n="pr3d">Sesión fotográfica, creación de contenido, diseño de identidad y lanzamiento de campañas.</p></div></div>
+    <div class="paso"><div class="pasn">04</div><div><div class="past" data-i18n="pr4t">Resultados & Crecimiento</div><p class="pasd" data-i18n="pr4d">Reportes mensuales y optimización continua. Crecemos juntos con métricas reales y transparentes.</p></div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section id="tst">
+  <div class="stg rv" data-i18n="tttg">Testimonios</div>
+  <h2 class="rv"><span data-i18n="tth1">Lo que dicen</span><br><em data-i18n="tth2">nuestros clientes</em></h2>
+  <div class="tg rv">
+    <div class="tc"><div class="tcs">★★★★★</div><p class="tcq" data-i18n="tq1">"Después de la sesión y el rediseño de nuestras redes, duplicamos nuestras reservaciones en dos meses."</p><div class="tca" data-i18n="ta1">María Rodríguez</div><div class="tcr" data-i18n="tr1">Restaurante Piantini, Santo Domingo</div></div>
+    <div class="tc"><div class="tcs">★★★★★</div><p class="tcq" data-i18n="tq2">"El equipo de Angie entiende el mercado dominicano. Saben cómo hablarle a nuestra gente. 100% recomendados."</p><div class="tca" data-i18n="ta2">Carlos Mena</div><div class="tcr" data-i18n="tr2">Desarrollador Inmobiliario, SD Este</div></div>
+    <div class="tc"><div class="tcs">★★★★★</div><p class="tcq" data-i18n="tq3">"Mi marca personal pasó de 800 a 12,000 seguidores en Instagram en 4 meses. Ahora los clientes me llegan solos."</p><div class="tca" data-i18n="ta3">Dra. Patricia Álvarez</div><div class="tcr" data-i18n="tr3">Médico Estético, Naco</div></div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="cont">
+  <div class="cgw"></div>
+  <div class="cgg">
+    <div class="ci">
+      <div class="stg rv" data-i18n="ctg">Conversemos</div>
+      <h2 class="rv"><span data-i18n="ch1a">¿Lista para</span><br><em data-i18n="ch1b">transformar</em><br><span data-i18n="ch1c">tu marca?</span></h2>
+      <p class="rv" data-i18n="cd">No importa si eres emprendedora comenzando o empresa establecida — si quieres crecer en RD y más allá, hablemos hoy.</p>
+      <div class="chs rv">
+        <a href="https://wa.me/18097071943" target="_blank" class="ch"><div class="chi">💬</div><div><div class="chl" data-i18n="cwa">WhatsApp · Respondemos en &lt;1h</div><div class="chv">+1 (809) 707-1943</div></div></a>
+        <a href="mailto:angie.lpz08@gmail.com" class="ch"><div class="chi">✉️</div><div><div class="chl" data-i18n="cem">Email</div><div class="chv">angie.lpz08@gmail.com</div></div></a>
+        <a href="https://instagram.com/angielopez.ph" target="_blank" class="ch"><div class="chi">📸</div><div><div class="chl" data-i18n="cig">Instagram</div><div class="chv">@angielopez.ph</div></div></a>
+        <div class="ch" onclick="openChat()"><div class="chi">🤖</div><div><div class="chl" data-i18n="cai">Chat IA · 24/7</div><div class="chv" data-i18n="caiv">Chatea con nuestra IA ahora</div></div></div>
+      </div>
+    </div>
+    <div class="rv">
+      <div class="stg" data-i18n="cfg">Formulario de Contacto</div>
+      <form class="fs" onsubmit="sbform(event)">
+        <div class="fr">
+          <div class="fg2"><label class="fl" data-i18n="fn">Nombre</label><input class="fin" type="text" data-ph="fnph" placeholder="Tu nombre"></div>
+          <div class="fg2"><label class="fl" data-i18n="fb">Negocio / Marca</label><input class="fin" type="text" data-ph="fbph" placeholder="Tu negocio"></div>
+        </div>
+        <div class="fg2"><label class="fl" data-i18n="fph">WhatsApp / Teléfono</label><input class="fin" type="tel" placeholder="+1 809 000 0000"></div>
+        <div class="fg2"><label class="fl" data-i18n="fser">Servicio de Interés</label>
+          <select class="fse">
+            <option data-i18n="fsd">Selecciona un servicio</option>
+            <option data-i18n="fs1">Fotografía Profesional</option>
+            <option data-i18n="fs2">Gestión de Redes Sociales</option>
+            <option data-i18n="fs3">Construcción de Marca</option>
+            <option data-i18n="fs4">Campañas Publicitarias</option>
+            <option data-i18n="fs5">Plan Completo</option>
+            <option data-i18n="fs6">Consultoría</option>
+          </select>
+        </div>
+        <div class="fg2"><label class="fl" data-i18n="fmsg">Cuéntanos de tu proyecto</label><textarea class="fta" data-ph="fmph" placeholder="¿Qué quieres lograr?"></textarea></div>
+        <button type="submit" class="fsb" data-i18n="fsub">Enviar Mensaje →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<!-- COTIZADOR INTELIGENTE -->
+<section id="cotizador">
+  <div class="stg rv" style="justify-content:center;text-align:center">Cotizador Inteligente</div>
+  <h2 class="rv" style="text-align:center"><span data-i18n="qh1">¿Cuánto cuesta</span><br><em data-i18n="qh2">lo que necesitas?</em></h2>
+  <p class="rv" style="text-align:center;color:var(--mu);font-size:.88rem;margin-bottom:28px;max-width:420px;margin-left:auto;margin-right:auto" data-i18n="qsub">Responde 3 preguntas y te recomendamos el servicio exacto con precio estimado.</p>
+  <div class="quiz-wrap rv">
+    <!-- STEP 1: Tipo de negocio -->
+    <div class="quiz-step active" id="qs1">
+      <div class="quiz-q" data-i18n="qq1">¿Qué tipo de negocio tienes?</div>
+      <div class="quiz-sub" data-i18n="qq1s">Esto nos ayuda a recomendarte la solución más efectiva</div>
+      <div class="quiz-opts">
+        <button class="quiz-opt" onclick="selectOpt(1,'restaurante')"><span class="opt-ico">🍽️</span><div><div class="opt-txt">Restaurante / F&B</div><div class="opt-sub">Comida, cafés, delivery</div></div></button>
+        <button class="quiz-opt" onclick="selectOpt(1,'profesional')"><span class="opt-ico">⚖️</span><div><div class="opt-txt">Servicio Profesional</div><div class="opt-sub">Médico, abogado, consultor</div></div></button>
+        <button class="quiz-opt" onclick="selectOpt(1,'retail')"><span class="opt-ico">🛍️</span><div><div class="opt-txt">Tienda / Producto</div><div class="opt-sub">Retail, e-commerce</div></div></button>
+        <button class="quiz-opt" onclick="selectOpt(1,'inmobiliaria')"><span class="opt-ico">🏡</span><div><div class="opt-txt">Inmobiliaria / Turismo</div><div class="opt-sub">Propiedades, hoteles</div></div></button>
+        <button class="quiz-opt" onclick="selectOpt(1,'belleza')"><span class="opt-ico">💆</span><div><div class="opt-txt">Belleza / Wellness</div><div class="opt-sub">Salón, spa, estética</div></div></button>
+        <button class="quiz-opt" onclick="selectOpt(1,'otro')"><span class="opt-ico">💡</span><div><div class="opt-txt">Otro tipo de negocio</div><div class="opt-sub">Coach, marca personal...</div></div></button>
+      </div>
+    </div>
+    <!-- STEP 2: Objetivo -->
+    <div class="quiz-step" id="qs2">
+      <div class="quiz-q" data-i18n="qq2">¿Qué es lo más urgente ahora mismo?</div>
+      <div class="quiz-sub" data-i18n="qq2s">Elige el objetivo principal de tu inversión</div>
+      <div class="quiz-opts">
+        <button class="quiz-opt" onclick="selectOpt(2,'fotos')"><span class="opt-ico">📸</span><div><div class="opt-txt">Necesito fotos profesionales</div><div class="opt-sub">Para redes, web o publicidad</div></div></button>
+        <button class="quiz-opt" onclick="selectOpt(2,'redes')"><span class="opt-ico">📱</span><div><div class="opt-txt">Quiero crecer en redes sociales</div><div class="opt-sub">Más seguidores y engagement</div></div></button>
+        <button class="quiz-opt" onclick="selectOpt(2,'marca')"><span class="opt-ico">🏛️</span><div><div class="opt-txt">Necesito una marca sólida</div><div class="opt-sub">Logo, identidad, posicionamiento</div></div></button>
+        <button class="quiz-opt" onclick="selectOpt(2,'ventas')"><span class="opt-ico">🎯</span><div><div class="opt-txt">Quiero más clientes / ventas</div><div class="opt-sub">Campañas y publicidad digital</div></div></button>
+      </div>
+    </div>
+    <!-- STEP 3: Presupuesto -->
+    <div class="quiz-step" id="qs3">
+      <div class="quiz-q" data-i18n="qq3">¿Cuánto puedes invertir mensualmente?</div>
+      <div class="quiz-sub" data-i18n="qq3s">Sin compromiso — solo para recomendarte lo que más se ajusta</div>
+      <div class="quiz-opts" style="grid-template-columns:1fr 1fr">
+        <button class="quiz-opt" onclick="selectOpt(3,'basico')"><span class="opt-ico">🌱</span><div><div class="opt-txt">Menos de $400/mes</div><div class="opt-sub">Empezando o presupuesto ajustado</div></div></button>
+        <button class="quiz-opt" onclick="selectOpt(3,'medio')"><span class="opt-ico">🚀</span><div><div class="opt-txt">$400 - $800/mes</div><div class="opt-sub">Listo para crecer en serio</div></div></button>
+        <button class="quiz-opt" onclick="selectOpt(3,'alto')"><span class="opt-ico">⚡</span><div><div class="opt-txt">$800 - $1,500/mes</div><div class="opt-sub">Inversión fuerte en marketing</div></div></button>
+        <button class="quiz-opt" onclick="selectOpt(3,'enterprise')"><span class="opt-ico">🏆</span><div><div class="opt-txt">+$1,500/mes</div><div class="opt-sub">Empresa o presupuesto amplio</div></div></button>
+      </div>
+    </div>
+    <!-- RESULT -->
+    <div class="quiz-step" id="qs-result">
+      <div class="quiz-result" id="quizResultBox"></div>
+      <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+        <a href="https://wa.me/18097071943" target="_blank" class="bp" style="flex:1;text-align:center">💬 Hablar con Angie ahora</a>
+        <button onclick="resetQuiz()" class="bg" style="flex:0;white-space:nowrap">↺ Empezar de nuevo</button>
+      </div>
+    </div>
+    <!-- PROGRESS -->
+    <div class="quiz-nav" id="quizNav" style="margin-top:16px">
+      <button class="quiz-back" id="quizBackBtn" onclick="quizBack()" style="display:none">← Atrás</button>
+      <div style="flex:1"></div>
+      <div class="quiz-prog"><div class="quiz-prog-bar" id="quizProgBar" style="width:33%"></div></div>
+      <div style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--mu);margin-left:10px" id="quizProgTxt">1 / 3</div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTAL ACCESS -->
+<section id="portal-access" style="background:linear-gradient(135deg,#18182a,var(--bg2));padding:clamp(32px,5vw,56px) 5%">
+  <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center">
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.26em;color:var(--or);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px"><span style="width:14px;height:1px;background:var(--or);display:inline-block"></span><span data-i18n="portal-tag">Acceso al Sistema</span></div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3vw,2.4rem);line-height:1;margin-bottom:10px"><span data-i18n="portal-h1">¿Ya eres</span> <em style="color:var(--pk);font-style:italic" data-i18n="portal-h2">cliente?</em></h2>
+      <p style="font-size:.86rem;color:rgba(255,255,255,.5);line-height:1.65;max-width:380px" data-i18n="portal-desc">Accede a tu portal para ver el progreso de tu trabajo, subir fotos y descargar tus entregables.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:11px">
+      <a href="client/portal.html" style="display:flex;align-items:center;gap:14px;padding:16px 20px;background:linear-gradient(135deg,rgba(255,107,138,.12),rgba(255,159,28,.06));border:1px solid rgba(255,107,138,.3);border-radius:10px;transition:all .3s;text-decoration:none" onmouseover="this.style.borderColor='var(--pk)';this.style.background='rgba(255,107,138,.18)'" onmouseout="this.style.borderColor='rgba(255,107,138,.3)';this.style.background='linear-gradient(135deg,rgba(255,107,138,.12),rgba(255,159,28,.06))'">
+        <span style="font-size:1.6rem;flex-shrink:0">👤</span>
+        <div>
+          <div style="font-weight:600;font-size:.92rem;margin-bottom:2px" data-i18n="portal-client-t">Portal del Cliente</div>
+          <div style="font-size:.76rem;color:rgba(255,255,255,.5)" data-i18n="portal-client-d">Ver mis trabajos, subir fotos, descargar entregables</div>
+        </div>
+        <span style="margin-left:auto;color:var(--pk);font-size:1.1rem">→</span>
+      </a>
+      <a href="admin/dashboard.html" style="display:flex;align-items:center;gap:14px;padding:16px 20px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;transition:all .3s;text-decoration:none" onmouseover="this.style.borderColor='rgba(255,255,255,.2)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)'">
+        <span style="font-size:1.6rem;flex-shrink:0">👩‍💼</span>
+        <div>
+          <div style="font-weight:600;font-size:.92rem;margin-bottom:2px" data-i18n="portal-admin-t">Panel de Administración</div>
+          <div style="font-size:.76rem;color:rgba(255,255,255,.5)" data-i18n="portal-admin-d">Solo para Angie Lopez Agency</div>
+        </div>
+        <span style="margin-left:auto;color:var(--mu);font-size:1.1rem">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ftt">
+    <div>
+      <div class="flo">
+        <svg width="30" height="30" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#FF6B8A"/><stop offset="100%" style="stop-color:#FF9F1C"/></linearGradient></defs><rect width="44" height="44" rx="11" fill="url(#lg2)"/><rect x="7" y="18" width="30" height="19" rx="4" fill="white" opacity=".95"/><circle cx="22" cy="27" r="6.5" fill="url(#lg2)"/><circle cx="22" cy="27" r="4" fill="white" opacity=".3"/><circle cx="22" cy="27" r="2.2" fill="white" opacity=".9"/><rect x="16" y="13" width="9" height="5" rx="2" fill="white" opacity=".85"/><circle cx="33" cy="21" r="1.8" fill="url(#lg2)" opacity=".8"/></svg>
+        <span>Angie Lopez Agency</span>
+      </div>
+      <p class="ftg" data-i18n="ftg">Fotografía de impacto, marcas irresistibles y marketing que mueve al mercado dominicano — y al mundo.</p>
+    </div>
+    <div class="fcc"><h4 data-i18n="fc1h">Servicios</h4><ul><li><a href="#foto" data-i18n="fc1a1">Fotografía</a></li><li><a href="#svc" data-i18n="fc1a2">Redes Sociales</a></li><li><a href="#svc" data-i18n="fc1a3">Branding</a></li><li><a href="#svc" data-i18n="fc1a4">Publicidad Digital</a></li></ul></div>
+    <div class="fcc"><h4 data-i18n="fc2h">Mercados</h4><ul><li><a href="#">Santo Domingo</a></li><li><a href="#">Santiago</a></li><li><a href="#">Punta Cana</a></li><li><a href="#" data-i18n="fc2a4">Internacional</a></li></ul></div>
+    <div class="fcc"><h4 data-i18n="fc3h">Contacto</h4><ul><li><a href="https://wa.me/18097071943">+1 809 707-1943</a></li><li><a href="mailto:angie.lpz08@gmail.com">angie.lpz08@gmail.com</a></li><li><a href="https://instagram.com/angielopez.ph">@angielopez.ph</a></li><li><a href="#">Santo Domingo, RD</a></li></ul></div>
+  </div>
+  <div class="fb">
+    <div class="fleg" data-i18n="fleg">© 2025 Angie Lopez Agency · Todos los derechos reservados · Santo Domingo, RD</div>
+    <div class="fso">
+      <a href="https://instagram.com/angielopez.ph" target="_blank" class="sl">ig</a>
+      <a href="#" class="sl">fb</a>
+      <a href="#" class="sl">tk</a>
+      <a href="#" class="sl">in</a>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING -->
+<div class="waf"><a href="https://wa.me/18097071943" target="_blank" title="WhatsApp">💬</a><span class="wafl">WhatsApp</span></div>
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- CHAT -->
+<div id="cw">
+  <div id="cp">
+    <div class="chd">
+      <div class="chav">👩‍💼</div>
+      <div>
+        <div class="chnm">Angie Lopez Agency</div>
+        <div class="chst" data-i18n="chst">● En línea — respuesta instantánea</div>
+      </div>
+    </div>
+    <div id="cms">
+      <div class="msg bot" data-i18n="cm1">¡Hola! 👋 Soy ALA, la asistente de <strong>Angie Lopez Agency</strong>. Estoy aquí para orientarte.</div>
+      <div class="msg bot" data-i18n="cm2">Antes de hablar de servicios o precios, me gustaría entender un poco tu negocio para recomendarte exactamente lo que necesitas. ¿Me cuentas qué haces?</div>
+    </div>
+    <div class="qrw" id="qrw">
+      <button class="qrb" onclick="qs('Tengo un negocio y quiero mejorar mi presencia digital')">🚀 Mejorar mi presencia</button>
+      <button class="qrb" onclick="qs('Quiero una sesión de fotografía profesional')">📸 Fotografía</button>
+      <button class="qrb" onclick="qs('Necesito que manejen mis redes sociales')">📱 Redes sociales</button>
+      <button class="qrb" onclick="qs('¿Cuánto cuestan sus servicios?')">💰 Precios</button>
+    </div>
+    <div class="ciw">
+      <input id="ci" type="text" placeholder="Escribe tu mensaje..." data-ph="chph" onkeypress="ck(event)" autocomplete="off">
+      <button id="cs" onclick="csend()">→</button>
+    </div>
+    <div class="cft">
+      <span class="cfl">angie.lpz08@gmail.com · 809 707-1943</span>
+      <span class="cfw">● IA activa</span>
+    </div>
+  </div>
+  <button id="cb" onclick="tgchat()">💬<div class="cpls"></div></button>
+</div>
+
+<script>
+const WA='18097071943';
+const AI_PROXY='/.netlify/functions/ai-proxy';
+const EMAIL_PROXY='/.netlify/functions/email-proxy';
+const AI_PROXY='/.netlify/functions/ai-proxy';
+const EMAIL_PROXY='/.netlify/functions/email-proxy';
+// Cloudflare Worker URLs (actualizar después del deploy)
+// API Key de Anthropic — pegar aquí tu key (sk-ant-api03-...)
+
+
+
+// ── TRANSLATIONS (ES + EN only, FR/IT/PT extend ES) ──
+const T={
+es:{'ann':'✨ Consulta gratuita · Escríbenos hoy','ls':'Fotografía · Marketing · Marcas','ns':'Servicios','nf':'Fotografía','nig':'Instagram','np':'Planes','nc2':'Contacto','ncta':'Iniciar Proyecto','badge':'Fotografía & Marketing · Santo Domingo RD','ey':'Santo Domingo, RD · Alcance Global','h1a':'Tu marca,','h1b':'irresistible','h1c':'al mundo.','hd':'Fotografía de impacto, estrategia digital y construcción de marcas que dominan el mercado dominicano y trascienden fronteras.','hb1':'Conversemos →','hb2':'Ver Servicios','s1':'Marcas Transformadas','s2':'Años Experiencia','s3':'Seguidores IG','s4':'Clientes Satisfechos','t1':'Fotografía Profesional','t2':'Gestión de Redes','t3':'Construcción de Marcas','t4':'Campañas Digitales','t5':'Diseño de Identidad','t6':'Fotografía de Productos','t7':'Estrategia de Contenido','stg1':'Lo que hacemos','sh1':'Todo lo que tu marca','sh2':'necesita crecer','sd':'Desde la primera foto hasta la campaña global — somos el equipo creativo y estratégico que tu negocio dominicano necesita.','s1n':'Fotografía Profesional','s1d':'Marca personal, productos, negocios, eventos y campañas. Imágenes que cuentan tu historia y venden por ti.','s1t1':'Marca Personal','s1t2':'Productos','s1t3':'Eventos','s2n':'Gestión de Redes Sociales','s2d':'Instagram, Facebook, TikTok y LinkedIn. Contenido, comunidad, crecimiento orgánico y paid media.','s3n':'Construcción de Marca','s3d':'Identidad visual, manual de marca, naming y posicionamiento que hace tu negocio irresistible.','s4n':'Campañas Publicitarias','s4d':'Meta Ads, Google Ads y campañas digitales orientadas a resultados medibles.','s5n':'Estrategia de Contenido','s5d':'Calendarios editoriales, copywriting, guiones para Reels y todo el contenido que necesitas.','s6n':'Sitios Web & E-commerce','s6d':'Páginas web y tiendas online que convierten visitantes en clientes.','s7n':'Video & Producción','s7d':'Videos corporativos, Reels y comerciales que generan engagement real.','s8n':'Influencer & PR Digital','s8d':'Gestión de influencers en RD, PR digital y colaboraciones estratégicas.','s9n':'Consultoría Digital','s9d':'Auditoría completa de tu presencia digital y plan personalizado para escalar.','ftg':'Especialidad Principal','fh1':'Fotografía que','fh2':'vende tu historia','fd':'En el mercado dominicano, la imagen lo es todo. Negocios que invierten en fotografía profesional generan hasta 3x más engagement.','fp1n':'Marca Personal & Profesional','fp1p':'Desde RD$8,000 — 10 fotos editadas','fp2n':'Fotografía de Productos','fp2p':'Desde RD$6,500 — pack de 15 imágenes','fp3n':'Corporativa & Eventos','fp3p':'Desde RD$15,000 — cobertura completa','fp4n':'Gastronomía & Lifestyle','fp4p':'Desde RD$9,500 — menú completo','fp5n':'Turismo, Hoteles & Real Estate','fp5p':'Desde RD$20,000 — propiedad completa','igtg':'Nuestro Portafolio','igh1':'Síguenos en','igflw':'Seguir','igp':'posts','igs':'seguidores','igsg':'siguiendo','igbt':'Photographer','igbs':'Event · Corporate & Family','igbd':'Llevo tu marca con contenido premium y estratégico','igver':'Ver portafolio completo en Instagram →','igstg':'Portafolio Visual','ight1':'El trabajo habla','ight2':'por sí mismo','igd':'Cada imagen es el resultado de entender profundamente la historia del cliente — su negocio, su audiencia y el mensaje que necesita comunicar.','hl1t':'Event Photography','hl1d':'Corporate & Family — eventos capturados en imágenes impactantes.','hl2t':'Marca Personal','hl2d':'Tu imagen profesional, auténtica y magnética para destacar en el mercado.','hl3t':'Contenido Estratégico','hl3d':'Fotos y videos creados con intención para conectar con tu audiencia.','hl4t':'EN/ES · Global','hl4d':'Bilingüe, con visión internacional y raíces dominicanas.','igclt':'¿Quieres ver más del portafolio?','igcld':'Síguenos en Instagram para ver nuestro trabajo más reciente y casos de éxito.','igclb':'Seguir @angielopez.ph','mktg':'Mercado Dominicano','mkh1':'Sectores que','mkh2':'transformamos','mk1s':'Gastronomía','mk1n':'Restaurantes & F&B','mk1d':'Foto de menú, redes y campañas de delivery.','mk2s':'Inmobiliario','mk2n':'Real Estate & Turismo','mk2d':'Fotografía de propiedades y captación de inversores.','mk3s':'Belleza','mk3n':'Salones, Spas & Wellness','mk3d':'Marca personal en Instagram y TikTok.','mk4s':'Profesionales','mk4n':'Abogados & Médicos','mk4d':'Posicionamiento de autoridad y confianza.','mk5s':'Retail','mk5n':'Tiendas & E-commerce','mk5d':'Fotos de productos y campañas de ventas.','mk6s':'Eventos','mk6n':'Bodas & Corporativos','mk6d':'Cobertura fotográfica de alta calidad.','mk7s':'Construcción','mk7n':'Arquitectos & Dev.','mk7d':'Fotografía arquitectónica y marketing.','mk8s':'Educación','mk8n':'Coaches & Instituciones','mk8d':'Branding y redes para educadores.','prtg':'Cómo trabajamos','prh1':'Nuestro proceso','prh2':'paso a paso','pr1t':'Consulta Gratuita','pr1d':'Conversamos por WhatsApp o en persona. Sin compromisos, sin presión.','pr2t':'Diagnóstico & Propuesta','pr2d':'Analizamos tu presencia y te presentamos propuesta personalizada con estrategia y precios claros.','pr3t':'Producción & Ejecución','pr3d':'Sesión fotográfica, creación de contenido, identidad y lanzamiento de campañas.','pr4t':'Resultados & Crecimiento','pr4d':'Reportes mensuales y optimización continua. Crecemos juntos con métricas reales.','pltg':'Inversión','plh1':'Planes diseñados','plh2':'para el mercado RD','plid':'Precios en USD. También aceptamos pesos dominicanos (RD$) y transferencias locales.','pl1n':'Emprendedor','plmo':'/ mes · mín. 3 meses','p1f1':'1 red social gestionada','p1f2':'12 posts mensuales con diseño','p1f3':'1 sesión foto/mes (10 fotos)','p1f4':'Copywriting incluido','p1f5':'Reporte mensual de métricas','p1f6':'Soporte por WhatsApp','plb1':'Comenzar','plpop':'Más Popular','pl2n':'Negocio','plmo2':'/ mes · mín. 3 meses','p2f1':'3 redes sociales gestionadas','p2f2':'20 posts + 8 Stories/Reels','p2f3':'2 sesiones fotográficas/mes','p2f4':'Gestión de comunidad diaria','p2f5':'Campañas Meta/Google Ads','p2f6':'Diseño gráfico ilimitado','p2f7':'Reporte semanal + call estratégico','plb2':'Comenzar','pl3n':'Corporativo','plmo3':'/ mes · contratos anuales','p3f1':'Todas las redes + LinkedIn','p3f2':'Contenido diario + Reels semanales','p3f3':'Sesiones foto + video ilimitadas','p3f4':'Construcción de marca completa','p3f5':'Influencer marketing incluido','p3f6':'Gestión de PR digital','p3f7':'Equipo dedicado + director creativo','plb3':'Hablemos','plnt':'¿Solo necesitas una sesión de fotos? Paquetes desde RD$6,500. Escríbenos por WhatsApp.','pph1':'Paquetes de','pph2':'Fotografía','pp1n':'Esencial','pp1d':'2h · estudio o locación','pp1f1':'10 fotos editadas alta resolución','pp1f2':'2 cambios de vestuario','pp1f3':'Entrega en 5 días hábiles','pp1f4':'Ideal para perfil profesional','pp2n':'Marca Personal','pp2d':'Día completo · 2 locaciones','pp2f1':'30+ fotos editadas','pp2f2':'Planificación de look & concepto','pp2f3':'Fotos para redes, web y prensa','pp2f4':'Galería online privada','pp3n':'Negocio & Productos','pp3d':'Sesión completa · tu local','pp3f1':'25 fotos de productos/espacio','pp3f2':'Optimizadas para e-commerce','pp3f3':'Fondo blanco + lifestyle incluido','pp3f4':'Derechos comerciales completos','pp4n':'Eventos & Corporativo','pp4d':'Cobertura hasta 4 horas','pp4f1':'50+ fotos del evento','pp4f2':'Entrega express en 48h','pp4f3':'Retratos del equipo incluidos','pp4f4':'Licencia institucional','tttg':'Testimonios','tth1':'Lo que dicen','tth2':'nuestros clientes','tq1':'"Después de la sesión y el rediseño de nuestras redes, duplicamos nuestras reservaciones en dos meses."','ta1':'María Rodríguez','tr1':'Restaurante Piantini, Santo Domingo','tq2':'"El equipo de Angie entiende el mercado dominicano. Saben cómo hablarle a nuestra gente. 100% recomendados."','ta2':'Carlos Mena','tr2':'Desarrollador Inmobiliario, SD Este','tq3':'"Mi marca personal pasó de 800 a 12,000 seguidores en Instagram en 4 meses. Ahora los clientes me llegan solos."','ta3':'Dra. Patricia Álvarez','tr3':'Médico Estético, Naco','ctg':'Conversemos','ch1a':'¿Lista para','ch1b':'transformar','ch1c':'tu marca?','cd':'No importa si eres emprendedora comenzando o empresa establecida — si quieres crecer en RD y más allá, hablemos hoy.','cwa':'WhatsApp · Respondemos en <1h','cem':'Email','cig':'Instagram','cai':'Chat IA · 24/7','caiv':'Chatea con nuestra IA ahora','cfg':'Formulario de Contacto','fn':'Nombre','fnph':'Tu nombre','fb':'Negocio / Marca','fbph':'Tu negocio','fph':'WhatsApp / Teléfono','fser':'Servicio de Interés','fsd':'Selecciona un servicio','fs1':'Fotografía Profesional','fs2':'Gestión de Redes Sociales','fs3':'Construcción de Marca','fs4':'Campañas Publicitarias','fs5':'Plan Completo','fs6':'Consultoría','fmsg':'Cuéntanos de tu proyecto','fmph':'¿Qué quieres lograr?','fsub':'Enviar Mensaje →','ftg':'Fotografía de impacto, marcas irresistibles y marketing que mueve al mercado dominicano — y al mundo.','fc1h':'Servicios','fc1a1':'Fotografía','fc1a2':'Redes Sociales','fc1a3':'Branding','fc1a4':'Publicidad Digital','fc2h':'Mercados','fc2a4':'Internacional','fc3h':'Contacto','portal-tag':'Acceso al Sistema','portal-h1':'¿Ya eres','portal-h2':'cliente?','portal-desc':'Accede a tu portal para ver el progreso de tu trabajo, subir fotos y descargar tus entregables.','portal-client-t':'Portal del Cliente','portal-client-d':'Ver mis trabajos, subir fotos, descargar entregables','portal-admin-t':'Panel de Administración','portal-admin-d':'Solo para Angie Lopez Agency','fleg':'© 2025 Angie Lopez Agency · Todos los derechos reservados · Santo Domingo, RD','chst':'● En línea — respuesta instantánea','cm1':'¡Hola! 👋 Soy la asistente de Angie Lopez Agency. ¿En qué puedo ayudarte?','cm2':'Cuéntame de tu negocio y te oriento sobre el servicio ideal para ti.','chph':'Escribe tu mensaje...','fsok':'✓ Mensaje enviado — te contactamos pronto'},
+en:{'ann':'✨ Free consultation · Write us today','ls':'Photography · Marketing · Brands','ns':'Services','nf':'Photography','nig':'Instagram','np':'Plans','nc2':'Contact','ncta':'Start Project','badge':'Photography & Marketing · Santo Domingo DR','ey':'Santo Domingo, DR · Global Reach','h1a':'Your brand,','h1b':'irresistible','h1c':'to the world.','hd':'High-impact photography, digital strategy and brand building that dominates the Dominican market and transcends borders.','hb1':"Let's Talk →",'hb2':'View Services','s1':'Brands Transformed','s2':'Years Experience','s3':'IG Followers','s4':'Satisfied Clients','t1':'Professional Photography','t2':'Social Media Management','t3':'Brand Building','t4':'Digital Campaigns','t5':'Identity Design','t6':'Product Photography','t7':'Content Strategy','stg1':'What we do','sh1':'Everything your brand','sh2':'needs to grow','sd':'From the first photo to the global campaign — we are the creative and strategic team your business needs.','s1n':'Professional Photography','s1d':'Personal brand, products, business, events and campaigns. Images that tell your story and sell for you.','s1t1':'Personal Brand','s1t2':'Products','s1t3':'Events','s2n':'Social Media Management','s2d':'Instagram, Facebook, TikTok and LinkedIn. Content, community, organic growth and paid media.','s3n':'Brand Building','s3d':'Visual identity, brand guidelines, naming and positioning that makes your business irresistible.','s4n':'Advertising Campaigns','s4d':'Meta Ads, Google Ads and digital campaigns focused on measurable results.','s5n':'Content Strategy','s5d':'Editorial calendars, copywriting, Reel scripts and all the content you need.','s6n':'Websites & E-commerce','s6d':'Professional websites and online stores that convert visitors into customers.','s7n':'Video & Production','s7d':'Corporate videos, Reels and commercials that generate real engagement.','s8n':'Influencer & PR','s8d':'Influencer management in DR, digital PR and strategic collaborations.','s9n':'Digital Consulting','s9d':'Complete digital audit and personalized action plan for businesses that want to scale.','ftg':'Core Specialty','fh1':'Photography that','fh2':'sells your story','fd':'In the Dominican market, image is everything. Businesses investing in professional photography generate up to 3x more engagement.','fp1n':'Personal & Professional Brand','fp1p':'From RD$8,000 — 10 edited photos','fp2n':'Product Photography','fp2p':'From RD$6,500 — 15 image pack','fp3n':'Corporate & Events','fp3p':'From RD$15,000 — full coverage','fp4n':'Gastronomy & Lifestyle','fp4p':'From RD$9,500 — full menu','fp5n':'Tourism, Hotels & Real Estate','fp5p':'From RD$20,000 — full property','igtg':'Our Portfolio','igh1':'Follow us on','igflw':'Follow','igp':'posts','igs':'followers','igsg':'following','igbt':'Photographer','igbs':'Event · Corporate & Family','igbd':'I elevate your brand with premium and strategic content','igver':'View full portfolio on Instagram →','igstg':'Visual Portfolio','ight1':'The work speaks','ight2':'for itself','igd':"Every image is the result of deeply understanding the client's story — their business, audience and the message they need to communicate.",'hl1t':'Event Photography','hl1d':'Corporate & Family — events captured in impactful images.','hl2t':'Personal Brand','hl2d':'Your professional image, authentic and magnetic to stand out in the market.','hl3t':'Strategic Content','hl3d':'Photos and videos created with intention to connect with your audience.','hl4t':'EN/ES · Global','hl4d':'Bilingual, with international vision and Dominican roots.','igclt':'Want to see more of the portfolio?','igcld':'Follow us on Instagram for our latest work and client success stories.','igclb':'Follow @angielopez.ph','mktg':'Dominican Market','mkh1':'Sectors we','mkh2':'transform','mk1s':'Gastronomy','mk1n':'Restaurants & F&B','mk1d':'Menu photography, social media, delivery campaigns.','mk2s':'Real Estate','mk2n':'Real Estate & Tourism','mk2d':'Property photography and investor acquisition.','mk3s':'Beauty','mk3n':'Salons, Spas & Wellness','mk3d':'Personal brand on Instagram and TikTok.','mk4s':'Professionals','mk4n':'Lawyers & Doctors','mk4d':'Authority positioning and trust building.','mk5s':'Retail','mk5n':'Shops & E-commerce','mk5d':'Product photography and sales campaigns.','mk6s':'Events','mk6n':'Weddings & Corporate','mk6d':'High quality photo coverage.','mk7s':'Construction','mk7n':'Architects & Devs.','mk7d':'Architectural photography and digital marketing.','mk8s':'Education','mk8n':'Coaches & Institutions','mk8d':'Branding and social media for educators.','prtg':'How we work','prh1':'Our process','prh2':'step by step','pr1t':'Free Consultation','pr1d':'We chat via WhatsApp or in person. No commitments, no pressure.','pr2t':'Diagnosis & Proposal','pr2d':'We analyze your presence and present a clear strategy and pricing proposal.','pr3t':'Production & Execution','pr3d':'Photo session, content creation, identity design and campaign launch.','pr4t':'Results & Growth','pr4d':'Monthly reports and continuous optimization. We grow together with real metrics.','pltg':'Investment','plh1':'Plans designed','plh2':'for the DR market','plid':'Prices in USD. We also accept Dominican pesos (RD$) and local transfers.','pl1n':'Entrepreneur','plmo':'/ month · 3-month min.','p1f1':'1 managed social network','p1f2':'12 monthly posts with design','p1f3':'1 photo session/month (10 photos)','p1f4':'Copywriting included','p1f5':'Monthly metrics report','p1f6':'WhatsApp support','plb1':'Get Started','plpop':'Most Popular','pl2n':'Business','plmo2':'/ month · 3-month min.','p2f1':'3 managed social networks','p2f2':'20 posts + 8 Stories/Reels','p2f3':'2 photo sessions/month','p2f4':'Daily community management','p2f5':'Meta/Google Ads campaigns','p2f6':'Unlimited graphic design','p2f7':'Weekly report + strategy call','plb2':'Get Started','pl3n':'Corporate','plmo3':'/ month · annual contracts','p3f1':'All networks + LinkedIn','p3f2':'Daily content + weekly Reels','p3f3':'Unlimited photo + video sessions','p3f4':'Complete brand building','p3f5':'Influencer marketing included','p3f6':'Digital PR management','p3f7':'Dedicated team + creative director','plb3':"Let's Talk",'plnt':'Only need a photo session? Packages from RD$6,500. Message us on WhatsApp.','pph1':'Photography','pph2':'Packages','pp1n':'Essential','pp1d':'2h · studio or location','pp1f1':'10 edited high-resolution photos','pp1f2':'2 outfit changes','pp1f3':'Delivery in 5 business days','pp1f4':'Ideal for professional profile','pp2n':'Personal Brand','pp2d':'Full day · 2 locations','pp2f1':'30+ edited photos','pp2f2':'Look & concept planning','pp2f3':'Photos for social media, web and press','pp2f4':'Private online gallery','pp3n':'Business & Products','pp3d':'Full session · your location','pp3f1':'25 product/space photos','pp3f2':'Optimized for e-commerce','pp3f3':'White background + lifestyle included','pp3f4':'Full commercial rights','pp4n':'Events & Corporate','pp4d':'Coverage up to 4 hours','pp4f1':'50+ event photos','pp4f2':'Express delivery in 48h','pp4f3':'Team portraits included','pp4f4':'Institutional license','tttg':'Testimonials','tth1':'What our','tth2':'clients say','tq1':'"After the session and redesign of our social media, we doubled our reservations in two months."','ta1':'María Rodríguez','tr1':'Piantini Restaurant, Santo Domingo','tq2':'"Angie\'s team understands the Dominican market. They know how to speak to our people. 100% recommended."','ta2':'Carlos Mena','tr2':'Real Estate Developer, SD East','tq3':'"My personal brand went from 800 to 12,000 Instagram followers in 4 months. Clients now come to me."','ta3':'Dr. Patricia Álvarez','tr3':'Aesthetic Doctor, Naco','ctg':"Let's Talk",'ch1a':'Ready to','ch1b':'transform','ch1c':'your brand?','cd':"Whether you're just starting or established — if you want to grow in DR and beyond, let's talk today.",'cwa':'WhatsApp · Reply in <1h','cem':'Email','cig':'Instagram','cai':'AI Chat · 24/7','caiv':'Chat with our AI now','cfg':'Contact Form','fn':'Name','fnph':'Your name','fb':'Business / Brand','fbph':'Your business','fph':'WhatsApp / Phone','fser':'Service of Interest','fsd':'Select a service','fs1':'Professional Photography','fs2':'Social Media Management','fs3':'Brand Building','fs4':'Advertising Campaigns','fs5':'Full Plan','fs6':'Consulting','fmsg':'Tell us about your project','fmph':'What do you want to achieve?','fsub':'Send Message →','ftg':'High-impact photography, irresistible brands and marketing that moves the Dominican market — and the world.','fc1h':'Services','fc1a1':'Photography','fc1a2':'Social Media','fc1a3':'Branding','fc1a4':'Digital Advertising','fc2h':'Markets','fc2a4':'International','fc3h':'Contact','portal-tag':'Acceso al Sistema','portal-h1':'¿Ya eres','portal-h2':'cliente?','portal-desc':'Accede a tu portal para ver el progreso de tu trabajo, subir fotos y descargar tus entregables.','portal-client-t':'Portal del Cliente','portal-client-d':'Ver mis trabajos, subir fotos, descargar entregables','portal-admin-t':'Panel de Administración','portal-admin-d':'Solo para Angie Lopez Agency','portal-tag':'System Access','portal-h1':'Already a','portal-h2':'client?','portal-desc':'Access your portal to see your project progress, upload photos and download your deliverables.','portal-client-t':'Client Portal','portal-client-d':'View my projects, upload photos, download deliverables','portal-admin-t':'Administration Panel','portal-admin-d':'Only for Angie Lopez Agency','fleg':'© 2025 Angie Lopez Agency · All rights reserved · Santo Domingo, DR','chst':'● Online — instant response','cm1':'Hi! 👋 I\'m the assistant of Angie Lopez Agency. How can I help you?','cm2':'Tell me about your business and I\'ll guide you to the ideal service.','chph':'Type your message...','fsok':'✓ Message sent — we\'ll contact you soon'}
+};
+// FR/IT/PT inherit ES with minimal overrides
+['fr','it','pt'].forEach(l=>{
+  T[l]={...T.es};
+  const o={fr:{ann:'✨ Consultation gratuite · Écrivez-nous',ncta:'Démarrer',hb1:'Parlons →',chst:'● En ligne',cm1:'Bonjour! 👋 Je suis l\'assistante d\'Angie Lopez Agency.',chph:'Tapez votre message...'},it:{ann:'✨ Consulenza gratuita · Scrivici',ncta:'Inizia',hb1:'Parliamo →',chst:'● Online',cm1:'Ciao! 👋 Sono l\'assistente di Angie Lopez Agency.',chph:'Scrivi il tuo messaggio...'},pt:{ann:'✨ Consulta gratuita · Escreva-nos',ncta:'Iniciar',hb1:'Vamos Conversar →',chst:'● Online',cm1:'Olá! 👋 Sou a assistente da Angie Lopez Agency.',chph:'Digite sua mensagem...'}};
+  Object.assign(T[l],o[l]);
+});
+
+const LM={es:{f:'🇩🇴',c:'ES'},en:{f:'🇺🇸',c:'EN'},fr:{f:'🇫🇷',c:'FR'},it:{f:'🇮🇹',c:'IT'},pt:{f:'🇧🇷',c:'PT'}};
+let lang='es';
+
+function sL(l){
+  lang=l;
+  const t=T[l]||T.es;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.getAttribute('data-i18n');
+    if(t[k]!==undefined)el.textContent=t[k];
+  });
+  document.querySelectorAll('[data-ph]').forEach(el=>{
+    const k=el.getAttribute('data-ph');
+    if(t[k]!==undefined)el.placeholder=t[k];
+  });
+  document.getElementById('lf').textContent=LM[l].f;
+  document.getElementById('lc').textContent=LM[l].c;
+  document.querySelectorAll('.lo').forEach(b=>b.classList.toggle('active',b.getAttribute('onclick').includes(`'${l}'`)));
+  document.querySelectorAll('.ml').forEach(b=>b.classList.toggle('active',b.getAttribute('onclick').includes(`'${l}'`)));
+  document.documentElement.lang=l;
+  document.getElementById('lw').classList.remove('open');
+}
+function tlw(){document.getElementById('lw').classList.toggle('open')}
+document.addEventListener('click',e=>{if(!document.getElementById('lw').contains(e.target))document.getElementById('lw').classList.remove('open')});
+
+let mob=false;
+function tmob(){mob=!mob;document.getElementById('hmbtn').classList.toggle('open',mob);document.getElementById('mobnav').classList.toggle('open',mob);document.body.style.overflow=mob?'hidden':'';}
+function cmob(){mob=false;document.getElementById('hmbtn').classList.remove('open');document.getElementById('mobnav').classList.remove('open');document.body.style.overflow='';}
+
+// SCROLL
+window.addEventListener('scroll',()=>{
+  const pct=(scrollY/(document.body.scrollHeight-innerHeight))*100;
+  document.getElementById('pb').style.width=Math.min(100,pct)+'%';
+  document.getElementById('btt').classList.toggle('vis',scrollY>400);
+},{passive:true});
+
+// REVEAL
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')}),{threshold:.07});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+// FORM
+function sbform(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.fsb');
+  const t=T[lang]||T.es;
+  btn.textContent=t['fsok']||'✓ Enviado';
+  btn.style.background='#4ade80';btn.style.color='#0F0F14';
+}
+
+// CHAT ENGINE
+let co=false,busy=false,hist=[];
+
+const SP=`Eres la asistente virtual de Angie Lopez Agency. Tu nombre es ALA y representas una agencia premium de fotografía profesional, marketing digital y construcción de marcas con sede en Santo Domingo, República Dominicana, con alcance global.
+
+IDENTIDAD Y FILOSOFÍA:
+Piensas y actúas como el mejor director de cuentas de una agencia de marketing de 30+ años. Tu mentalidad combina la precisión estratégica de Ogilvy, la creatividad de BBDO y el enfoque en ROI de las mejores agencias digitales del mundo. Entiendes el mercado dominicano profundamente pero piensas en escala global. Eres empática, directa, profesional y nunca genérica.
+
+IDIOMA: Detecta el idioma del usuario y responde SIEMPRE en ese idioma. Español → español dominicano/latinoamericano. Inglés → inglés. Francés → francés. Etc.
+
+CONTACTO DIRECTO:
+- WhatsApp: +1 (809) 707-1943 → wa.me/18097071943
+- Instagram: @angielopez.ph
+- Email: angie.lpz08@gmail.com
+
+════════════════════════════════════
+CATÁLOGO COMPLETO DE SERVICIOS Y PRECIOS
+════════════════════════════════════
+
+📸 FOTOGRAFÍA PROFESIONAL (especialidad core)
+• Marca Personal Esencial: RD$8,000
+  - 2 horas de sesión (estudio o locación exterior)
+  - 10 fotos editadas profesionalmente en alta resolución
+  - 2 cambios de vestuario incluidos
+  - Galería online privada para descarga
+  - Entrega: 5 días hábiles
+  - Ideal para: emprendedores, profesionales, coaches, médicos, abogados
+
+• Marca Personal Full Day: RD$18,000
+  - Día completo (6-8 horas)
+  - 2 locaciones distintas
+  - 30+ fotos editadas
+  - Planificación previa de look, concepto y mood board
+  - Galería online privada
+  - Ideal para: lanzamientos de marca, portafolios completos, influencers
+
+• Fotografía de Productos: RD$6,500
+  - 15 imágenes finales
+  - Fondo blanco profesional + shots de lifestyle
+  - Optimizadas para e-commerce, Amazon, redes sociales
+  - Retoque profesional incluido
+  - Derechos comerciales completos
+  - Ideal para: tiendas online, catálogos, publicidad
+
+• Gastronomía & Lifestyle: RD$9,500
+  - Sesión completa del menú o colección
+  - Estilismo de alimentos incluido
+  - Shots detalle + ambiente + plato completo
+  - Ideal para: restaurantes, cafés, chefs, catering, delivery
+
+• Fotografía Corporativa Estándar: RD$15,000
+  - Cobertura de hasta 3 horas
+  - Lanzamientos, conferencias, pasadías, team buildings
+  - Retratos del equipo incluidos
+  - Entrega 72 horas
+
+• Cobertura de Eventos Premium: RD$25,000
+  - Hasta 4 horas de cobertura completa
+  - 50+ fotos editadas seleccionadas
+  - Entrega express: 48 horas
+  - Licencia para uso institucional y publicitario
+  - Ideal para: bodas corporativas, conciertos, lanzamientos, galas
+
+• Turismo, Hoteles & Real Estate: RD$20,000
+  - Propiedad completa (interior + exterior)
+  - Drone disponible como add-on
+  - Shots de amenidades, habitaciones, áreas comunes
+  - Optimizadas para Airbnb, Booking, webs inmobiliarias
+  - Ideal para: hoteles boutique, apartamentos en venta, villas de alquiler
+
+📱 GESTIÓN DE REDES SOCIALES
+• Plan Emprendedor: $350 USD/mes (mínimo 3 meses)
+  - 1 red social gestionada (Instagram recomendado)
+  - 12 posts mensuales con diseño profesional
+  - 1 sesión fotográfica por mes (10 fotos editadas)
+  - Copywriting de captions incluido
+  - Reporte mensual de métricas y crecimiento
+  - Soporte por WhatsApp de lunes a sábado
+  - Para: emprendedores iniciando, negocios pequeños
+
+• Plan Negocio: $750 USD/mes (mínimo 3 meses)
+  - 3 redes sociales (Instagram + Facebook + TikTok o LinkedIn)
+  - 20 posts mensuales + 8 Stories/Reels
+  - 2 sesiones fotográficas por mes
+  - Gestión de comunidad diaria (respuesta a comentarios y DMs)
+  - Campañas de Meta Ads y/o Google Ads gestionadas
+  - Diseño gráfico ilimitado
+  - Estrategia de contenido mensual
+  - Reporte semanal + llamada estratégica mensual
+  - Para: negocios establecidos que quieren escalar
+
+• Plan Corporativo: $1,500 USD/mes (contratos anuales)
+  - Todas las redes sociales + LinkedIn
+  - Contenido diario + Reels semanales
+  - Sesiones de foto y video ilimitadas
+  - Construcción o renovación de marca completa
+  - Influencer marketing y relaciones con medios
+  - Gestión de PR digital
+  - Equipo dedicado con director creativo asignado
+  - Reportes ejecutivos semanales
+  - Para: empresas medianas, cadenas, franquicias
+
+🏛️ CONSTRUCCIÓN DE MARCA (BRANDING)
+Proceso completo de identidad visual y posicionamiento:
+- Naming estratégico
+- Logo profesional en vectorial (todos los formatos: AI, SVG, PNG, PDF)
+- Paleta de colores con justificación psicológica
+- Sistema tipográfico (fuente primaria + secundaria)
+- Manual de marca completo (uso, aplicaciones, restricciones)
+- Papelería corporativa (tarjetas, membrete, firma email)
+- Aplicaciones digitales (plantillas para redes)
+Inversión: cotización personalizada según alcance
+Proceso: 3-6 semanas
+
+🎯 CAMPAÑAS PUBLICITARIAS DIGITALES
+- Meta Ads (Instagram + Facebook): segmentación por edad, ubicación, intereses, comportamiento de compra. ROI promedio clientes: 3.5x
+- Google Ads: búsqueda, display, YouTube, Shopping
+- TikTok Ads: audiencias 18-34 años, contenido nativo viral
+- Presupuesto mínimo recomendado en pauta: $200-300 USD/mes
+- Fee de gestión: incluido en planes o cotización independiente
+- Incluye: diseño de creatividades, A/B testing, optimización continua, reportes de ROAS, CPC, CPL
+
+✍️ ESTRATEGIA Y PRODUCCIÓN DE CONTENIDO
+- Calendarios editoriales mensuales personalizados por industria
+- Guiones para Reels y videos cortos (formatos virales)
+- Copywriting para captions, blogs, email marketing
+- 5 pilares de contenido: educativo / entretenimiento / ventas / comunidad / behind-the-scenes
+- Adaptación por plataforma: tono distinto para IG, LinkedIn, TikTok
+
+🌐 SITIOS WEB Y E-COMMERCE
+- Landing pages de alta conversión
+- Sitios web corporativos e institucionales
+- Tiendas online (WooCommerce, Shopify)
+- SEO técnico y de contenido incluido
+- Tiempo de entrega: 2-4 semanas según alcance
+- Mantenimiento mensual disponible
+
+🎬 VIDEO Y PRODUCCIÓN AUDIOVISUAL
+- Reels para Instagram y TikTok (corto, viral, nativo)
+- Videos corporativos e institucionales
+- Spots publicitarios para digital y TV
+- Testimoniales y casos de éxito
+- Behind the scenes y contenido orgánico
+- Proceso: guión + filmación + edición + música + subtítulos + subtítulos CC
+
+🤝 INFLUENCER MARKETING Y PR DIGITAL
+- Red de micro-influencers dominicanos (5K-50K seguidores)
+- Macro-influencers (+50K) según presupuesto
+- Gestión de colaboraciones end-to-end: briefing, seguimiento, reporte
+- PR digital: notas de prensa, menciones en medios, gestión de reseñas Google
+- Cobertura de eventos: coordinación de prensa y contenido
+
+📊 CONSULTORÍA Y AUDITORÍA DIGITAL
+- Auditoría 360° de presencia digital (redes, web, Google My Business)
+- Análisis de competencia en el mercado dominicano
+- Plan estratégico de 90 días con objetivos medibles
+- Sesiones 1:1 con estratega senior
+- Diagnóstico gratuito inicial disponible
+
+════════════════════════════════════
+SECTORES Y CASOS DE ÉXITO EN RD
+════════════════════════════════════
+Gastronomía (restaurantes, cafés, delivery, chefs), Inmobiliario y turismo (hoteles, villas, constructoras), Belleza y wellness (salones, spas, estéticas, nutricionistas), Servicios profesionales (abogados, médicos, contadores, coaches), Retail y e-commerce (moda, accesorios, productos locales), Eventos y entretenimiento (bodas, conciertos, corporativos), Construcción y arquitectura, Educación y formación (universidades, academias, coaches), ONG e instituciones
+
+════════════════════════════════════
+METODOLOGÍA DE CONVERSACIÓN — 4 FASES
+════════════════════════════════════
+
+FASE 1 — ESCUCHAR Y DIAGNOSTICAR (mensajes 1-2):
+Antes de recomendar NADA, entiende la situación real. Haz UNA sola pregunta abierta:
+"¿Me cuentas un poco de tu negocio? ¿Qué estás haciendo ahora y qué te gustaría lograr?"
+Escucha activamente. Identifica: tipo de negocio, etapa (nuevo/establecido), problema principal.
+
+FASE 2 — PROFUNDIZAR (mensajes 2-4):
+Haz máximo 2-3 preguntas de calificación, UNA a la vez:
+- ¿Cuál es el mayor reto que tienes con tu presencia digital ahora mismo?
+- ¿Tienes ya redes sociales o web? ¿Con qué resultados?
+- ¿Tienes en mente un presupuesto mensual aproximado para marketing?
+Nunca preguntes todo junto. Sé natural, como una consultora senior en una reunión.
+
+FASE 3 — RECOMENDAR CON PRECISIÓN (cuando tienes suficiente info):
+Presenta la solución como experta, no como vendedora:
+- Nombra el servicio exacto que resuelve su problema
+- Explica por qué esa solución y no otra
+- Da el precio con contexto de valor (no solo el número)
+- Comparte un resultado similar si aplica: "Para un restaurante similar en Piantini, la sesión de gastronomía generó un 40% más de reservaciones en el primer mes"
+
+FASE 4 — CONVERTIR A LEAD CALIFICADO (timing correcto):
+Solo cuando el prospecto tiene: negocio definido + problema claro + señal de interés real.
+Señales de conversión: "me interesa", "cuánto cuesta exactamente", "cómo empezamos", "quiero hacer eso", fecha límite mencionada, 3+ mensajes sobre mismo servicio.
+
+Fórmula de derivación natural:
+"Con lo que me cuentas, ya tengo una imagen clara de lo que necesitas y cómo podemos ayudarte. El siguiente paso sería una conversación de 15 minutos con Angie para afinar los detalles y prepararte una propuesta a la medida. ¿Le escribes ahora por WhatsApp? → wa.me/18097071943 La consulta es completamente gratuita y responden en menos de 1 hora."
+
+NO derives si: solo preguntó precios sin contexto, está en fase 1 de exploración, no has identificado su negocio.
+
+════════════════════════════════════
+CONOCIMIENTO DE AGENCIA (30 AÑOS)
+════════════════════════════════════
+
+Cuando el cliente hace preguntas generales de marketing, responde como experta:
+
+SOBRE INSTAGRAM EN RD:
+- Frecuencia óptima: 5-7 posts/semana + Stories diarias
+- Mejor horario RD: 12pm-2pm y 7pm-9pm
+- Formatos que más convierten: Reels cortos (7-15s), carruseles educativos, testimoniales en video
+- Hashtags: mezcla local (#SantoDomingo #MarcasRD) con nicho específico
+- Engagement rate saludable en RD: 3-6%
+
+SOBRE FOTOGRAFÍA PARA MARCAS:
+- Las marcas con fotografía profesional generan 3x más confianza y hasta 40% más conversiones
+- Para e-commerce: fondo blanco + lifestyle = combinación ganadora
+- Para marca personal: autenticidad > perfección. Las fotos "reales" convierten más
+- El mejor momento para invertir en fotos: antes de lanzar, no después
+
+SOBRE BRANDING:
+- El 90% de las decisiones de compra son emocionales. El branding es la emoción
+- Un logo no es una marca. Una marca es la experiencia completa
+- Las marcas que definen su "por qué" (propósito) retienen 5x más clientes
+- Reposicionar una marca existente cuesta el doble que hacerlo bien desde el inicio
+
+SOBRE META ADS EN RD:
+- CPM promedio RD: $3-8 USD
+- Audiencia objetivo mínima recomendada: 50,000 personas
+- Frecuencia ideal: 3-5 impactos por persona antes de convertir
+- Mejor objetivo para empezar: tráfico al perfil o mensajes a WhatsApp
+
+TONO Y FORMATO:
+- Cercana pero profesional. Como una directora de agencia que también es tu aliada
+- Máximo 3 párrafos por respuesta. Nunca un ensayo
+- Usa emojis con criterio: 1-2 por mensaje máximo, nunca como relleno
+- Haz UNA sola pregunta por turno. Nunca un interrogatorio
+- Si alguien está frustrado con resultados anteriores: valida primero, soluciona después
+- Si alguien dice que "ya probó otras agencias y no funcionó": profundiza qué falló antes de vender
+
+LÍMITES:
+- No inventar precios fuera del catálogo
+- No garantizar resultados específicos (sí compartir promedios reales)
+- Si no sabes algo concreto: "Eso lo confirma Angie directamente → wa.me/18097071943"
+- Nunca hablar mal de la competencia. Diferénciate por valor, no por crítica
+`;
+
+function addMsg(txt,role){
+  const d=document.getElementById('cms');
+  const m=document.createElement('div');
+  m.className='msg '+role;
+  m.innerHTML=txt
+    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+    .replace(/wa\.me\/(\d+)/g,'<a href="https://wa.me/$1" target="_blank">📲 Abrir WhatsApp</a>')
+    .replace(/\n/g,'<br>');
+  d.appendChild(m);d.scrollTop=d.scrollHeight;
+}
+function showDots(){
+  const d=document.getElementById('cms');
+  const m=document.createElement('div');
+  m.className='msg bot';m.id='ty';
+  m.innerHTML='<div class="qd"><span></span><span></span><span></span></div>';
+  d.appendChild(m);d.scrollTop=d.scrollHeight;
+}
+function hideDots(){const t=document.getElementById('ty');if(t)t.remove();}
+function setUI(on){document.getElementById('ci').disabled=!on;document.getElementById('cs').disabled=!on;if(on)document.getElementById('ci').focus();}
+
+function qs(txt){document.getElementById('qrw').style.display='none';document.getElementById('ci').value=txt;csend();}
+
+async function csend(){
+  if(busy)return;
+  const inp=document.getElementById('ci');
+  const msg=inp.value.trim();
+  if(!msg)return;
+  busy=true;inp.value='';
+  document.getElementById('qrw').style.display='none';
+  setUI(false);
+  addMsg(msg,'user');
+  hist.push({role:'user',content:msg});
+  showDots();
+  try{
+    const r=await fetch(AI_PROXY,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:700,system:SP,messages:hist})
+    });
+    hideDots();
+    if(!r.ok){
+      const errText = await r.text().catch(()=>'');
+      throw new Error(`HTTP ${r.status}: ${errText.slice(0,100)}`);
+    }
+    const data=await r.json();
+    const reply=data.content?.[0]?.text;
+    if(!reply)throw new Error('empty response');
+    hist.push({role:'assistant',content:reply});
+    addMsg(reply,'bot');
+  }catch(e){
+    hideDots();
+    console.error('Chat error:', e.message);
+    addMsg('Lo siento, tuve un problema de conexión. Intenta de nuevo en unos segundos.','bot');
+  }
+  busy=false;setUI(true);
+}
+function ck(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();csend();}}
+
+function tgchat(){
+  co=!co;
+  document.getElementById('cp').classList.toggle('open',co);
+  document.getElementById('cb').innerHTML=co?'✕<div class="cpls"></div>':'💬<div class="cpls"></div>';
+}
+function openChat(){if(!co)tgchat();}
+
+// ── COTIZADOR INTELIGENTE ──────────────────────────────
+const quizAnswers = {};
+let quizStep = 1;
+
+const recommendations = {
+  // fotos + cualquier negocio
+  fotos_basico: { pkg:'Sesión Esencial', price:'RD$8,000', desc:'Sesión de 2 horas con 10 fotos editadas en alta resolución. Ideal para arrancar con imagen profesional.', items:['10 fotos editadas','2 cambios de vestuario','Galería online privada','Entrega en 5 días'] },
+  fotos_medio: { pkg:'Marca Personal Full Day', price:'RD$18,000', desc:'Día completo en 2 locaciones con 30+ fotos. La inversión más inteligente para construir tu imagen de marca.', items:['30+ fotos editadas','2 locaciones distintas','Planificación de look y concepto','Galería online privada'] },
+  fotos_alto: { pkg:'Fotografía Corporativa', price:'RD$15,000 - RD$25,000', desc:'Cobertura completa para tu equipo, espacio o evento. Desde 3 hasta 4 horas de shooting profesional.', items:['Cobertura 3-4 horas','50+ fotos editadas','Retratos del equipo','Entrega express 48h'] },
+  fotos_enterprise: { pkg:'Paquete Turismo / Real Estate', price:'RD$20,000+', desc:'Fotografía completa de propiedad con opción de drone. Optimizada para Airbnb, Booking y portales inmobiliarios.', items:['Propiedad completa','Drone disponible','Optimizadas para plataformas','Derechos comerciales'] },
+  // redes
+  redes_basico: { pkg:'Plan Emprendedor', price:'$350 USD/mes', desc:'La entrada perfecta a las redes sociales profesionales. 1 red social con contenido, fotos y reporte mensual.', items:['1 red social gestionada','12 posts con diseño profesional','1 sesión de fotos/mes','Reporte mensual de métricas'] },
+  redes_medio: { pkg:'Plan Negocio', price:'$750 USD/mes', desc:'El más popular. 3 redes, campañas de ads y 2 sesiones de fotos por mes. Para negocios que quieren resultados reales.', items:['3 redes sociales','20 posts + 8 Reels/Stories','2 sesiones fotográficas','Campañas Meta/Google Ads'] },
+  redes_alto: { pkg:'Plan Negocio', price:'$750 USD/mes', desc:'Nuestro Plan Negocio cubre perfectamente tu inversión con gestión completa, ads y fotografía incluida.', items:['3 redes sociales','Gestión comunidad diaria','Campañas Meta/Google Ads','Diseño gráfico ilimitado'] },
+  redes_enterprise: { pkg:'Plan Corporativo', price:'$1,500 USD/mes', desc:'Equipo dedicado, contenido diario, influencer marketing y PR digital. Para marcas que quieren dominar su mercado.', items:['Todas las redes + LinkedIn','Contenido diario + Reels semanales','Influencer marketing','PR digital y relaciones con medios'] },
+  // marca
+  marca_basico: { pkg:'Branding Básico', price:'Cotización personalizada', desc:'Identidad visual completa: logo, paleta de colores, tipografía y manual de marca. La base de todo negocio serio.', items:['Logo profesional vectorial','Paleta de colores estratégica','Sistema tipográfico','Manual de marca'] },
+  marca_medio: { pkg:'Branding + Redes', price:'$750 USD/mes + branding', desc:'Identidad visual + gestión mensual de redes para construir y proyectar tu marca correctamente desde el inicio.', items:['Identidad visual completa','3 redes sociales gestionadas','Fotografía de marca personal','Estrategia de contenido'] },
+  marca_alto: { pkg:'Branding + Plan Negocio', price:'$750 USD/mes + setup', desc:'El combo perfecto para un lanzamiento de marca completo con presencia digital profesional desde el día 1.', items:['Branding completo','3 redes + ads gestionadas','2 sesiones de fotos/mes','Reporte semanal ejecutivo'] },
+  marca_enterprise: { pkg:'Plan Corporativo Completo', price:'$1,500 USD/mes', desc:'Solución integral con branding, contenido diario, influencers y PR digital para empresas que piensan en grande.', items:['Branding y rebranding','Equipo creativo dedicado','Influencer marketing RD','PR digital y medios'] },
+  // ventas
+  ventas_basico: { pkg:'Campañas + Fotos', price:'$350/mes + $200 pauta', desc:'Empezamos con redes y publicidad digital básica para generar leads y ventas con presupuesto controlado.', items:['1 red social gestionada','Campaña Meta Ads básica','1 sesión de fotos/mes','Reporte de ROAS mensual'] },
+  ventas_medio: { pkg:'Plan Negocio + Ads', price:'$750 USD/mes + pauta', desc:'El combo perfecto para escalar ventas: contenido de calidad + campañas de Meta y Google optimizadas continuamente.', items:['3 redes + gestión de ads','Presupuesto pauta recomendado $300/mes','A/B testing de creatividades','Reporte semanal de conversiones'] },
+  ventas_alto: { pkg:'Plan Negocio Premium', price:'$750 - $1,500/mes', desc:'Estrategia multicanal completa: Meta Ads, Google Ads, TikTok, con optimización continua y reporte ejecutivo semanal.', items:['Meta + Google + TikTok Ads','Retargeting incluido','Diseño de funnel de ventas','Dashboard de métricas en tiempo real'] },
+  ventas_enterprise: { pkg:'Plan Corporativo', price:'$1,500 USD/mes', desc:'Estrategia de marketing completa con equipo dedicado, campañas en todos los canales e influencer marketing incluido.', items:['Campañas multicanal gestionadas','Influencer marketing','PR digital','Equipo dedicado + director creativo'] },
+};
+
+function selectOpt(step, value) {
+  quizAnswers[step] = value;
+  document.querySelectorAll(`#qs${step} .quiz-opt`).forEach(b => b.classList.remove('selected'));
+  event.currentTarget.classList.add('selected');
+  setTimeout(() => goNextStep(step), 280);
+}
+
+function goNextStep(current) {
+  document.getElementById(`qs${current}`).classList.remove('active');
+  if (current < 3) {
+    quizStep = current + 1;
+    document.getElementById(`qs${quizStep}`).classList.add('active');
+    document.getElementById('quizBackBtn').style.display = '';
+    const pct = (quizStep / 3) * 100;
+    document.getElementById('quizProgBar').style.width = pct + '%';
+    document.getElementById('quizProgTxt').textContent = quizStep + ' / 3';
+  } else {
+    showQuizResult();
+  }
+}
+
+function quizBack() {
+  document.getElementById(`qs${quizStep}`).classList.remove('active');
+  quizStep--;
+  document.getElementById(`qs${quizStep}`).classList.add('active');
+  if (quizStep === 1) document.getElementById('quizBackBtn').style.display = 'none';
+  const pct = (quizStep / 3) * 100;
+  document.getElementById('quizProgBar').style.width = pct + '%';
+  document.getElementById('quizProgTxt').textContent = quizStep + ' / 3';
+}
+
+function showQuizResult() {
+  document.getElementById('qs3').classList.remove('active');
+  document.getElementById('quizNav').style.display = 'none';
+  
+  const objetivo = quizAnswers[2];
+  const presupuesto = quizAnswers[3];
+  const key = `${objetivo}_${presupuesto}`;
+  const rec = recommendations[key] || recommendations[`${objetivo}_medio`] || recommendations['redes_medio'];
+  
+  document.getElementById('quizResultBox').innerHTML = `
+    <div class="quiz-result-pkg">✨ Te recomendamos</div>
+    <div class="quiz-result-title">${rec.pkg}</div>
+    <div class="quiz-result-price">${rec.price}</div>
+    <p class="quiz-result-desc">${rec.desc}</p>
+    <ul class="quiz-result-items">${rec.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+    <div style="background:rgba(255,159,28,.08);border:1px solid rgba(255,159,28,.2);border-radius:8px;padding:10px;font-size:.78rem;color:rgba(255,255,255,.65)">
+      💡 Esta es una estimación basada en tus respuestas. Angie te dará una propuesta exacta y personalizada.
+    </div>`;
+  
+  document.getElementById('qs-result').classList.add('active');
+}
+
+function resetQuiz() {
+  quizAnswers[1] = quizAnswers[2] = quizAnswers[3] = null;
+  quizStep = 1;
+  document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('selected'));
+  document.getElementById('qs1').classList.add('active');
+  document.getElementById('quizBackBtn').style.display = 'none';
+  document.getElementById('quizNav').style.display = '';
+  document.getElementById('quizProgBar').style.width = '33%';
+  document.getElementById('quizProgTxt').textContent = '1 / 3';
+}
+
+</script>
+</body>
+</html>
