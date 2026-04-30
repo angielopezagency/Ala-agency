@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ALA Admin — Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23FF6B8A'/><text y='.9em' font-size='48' x='50%' text-anchor='middle' font-family='Georgia,serif' font-weight='900' fill='white'>ALA</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ala.css">
+<style>
+.notif-dot{width:8px;height:8px;background:var(--pk);border-radius:50%;animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.4)}}
+.progress-ring{width:56px;height:56px}
+.quick-action{background:rgba(255,255,255,.04);border:1px solid var(--gb);border-radius:10px;padding:14px;text-align:center;cursor:pointer;transition:all .2s}
+.quick-action:hover{border-color:var(--pk);background:rgba(255,107,138,.05);transform:translateY(-2px)}
+.quick-action .ico{font-size:1.5rem;margin-bottom:6px}
+.quick-action .lbl{font-size:.76rem;color:var(--mu)}
+.ia-btn{background:linear-gradient(135deg,var(--pu),var(--pkd));border:none;color:#fff;padding:10px 18px;border-radius:var(--r);font-size:.82rem;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all .2s}
+.ia-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(123,47,190,.4)}
+</style>
+</head>
+<body>
+
+<!-- LOGIN GATE -->
+<div id="loadingGate" style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0F0F14;flex-direction:column;gap:16px">
+  <svg width="48" height="48" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="lgl" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#FF6B8A"/><stop offset="100%" style="stop-color:#FF9F1C"/></linearGradient></defs>
+    <rect width="44" height="44" rx="11" fill="url(#lgl)"/>
+    <rect x="7" y="18" width="30" height="19" rx="4" fill="white" opacity=".95"/>
+    <circle cx="22" cy="27" r="6.5" fill="url(#lgl)"/>
+    <circle cx="22" cy="27" r="2.2" fill="white" opacity=".9"/>
+  </svg>
+  <div style="color:rgba(255,255,255,.5);font-family:monospace;font-size:.75rem;letter-spacing:.15em">Cargando panel...</div>
+</div>
+
+<div id="loginGate" class="login-page" style="display:none">
+  <div class="login-bg"></div>
+
+  <!-- LOGIN NORMAL -->
+  <div class="login-card" id="loginCard">
+    <div class="login-logo">
+      <svg width="38" height="38" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#FF6B8A"/><stop offset="100%" style="stop-color:#FF9F1C"/></linearGradient></defs><rect width="44" height="44" rx="11" fill="url(#lg)"/><rect x="7" y="18" width="30" height="19" rx="4" fill="white" opacity=".95"/><circle cx="22" cy="27" r="6.5" fill="url(#lg)"/><circle cx="22" cy="27" r="4" fill="white" opacity=".3"/><circle cx="22" cy="27" r="2.2" fill="white" opacity=".9"/><rect x="16" y="13" width="9" height="5" rx="2" fill="white" opacity=".85"/></svg>
+      <div><div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700">Angie Lopez Agency</div><div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.2em;color:var(--or);text-transform:uppercase">Panel de Administración</div></div>
+    </div>
+    <h2 class="login-title">Bienvenida, Angie</h2>
+    <p class="login-sub">Ingresa tu clave de acceso para entrar al panel.</p>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="form-group">
+        <label class="form-label">Clave de Acceso</label>
+        <input class="form-input" type="password" id="adminPass" placeholder="••••••••" onkeypress="if(event.key==='Enter')adminLogin()">
+      </div>
+      <button class="btn btn-pk" style="width:100%;justify-content:center" onclick="adminLogin()">Entrar al Panel →</button>
+      <button type="button" onclick="showForgot()" style="background:none;border:none;color:var(--mu);font-size:.8rem;cursor:pointer;text-align:center;padding:6px;transition:color .2s;text-decoration:underline;text-decoration-style:dotted" onmouseover="this.style.color='var(--pk)'" onmouseout="this.style.color='var(--mu)'">
+        ¿Olvidaste tu clave? Recupérala aquí
+      </button>
+    </div>
+    <p id="loginErr" style="color:var(--pk);font-size:.78rem;margin-top:12px;display:none">Clave incorrecta. Intenta de nuevo.</p>
+  </div>
+
+  <!-- RECUPERAR CLAVE -->
+  <div class="login-card" id="forgotCard" style="display:none">
+    <div style="text-align:center;margin-bottom:22px">
+      <div style="font-size:2.5rem;margin-bottom:10px">🔑</div>
+      <h2 class="login-title" style="margin-bottom:6px">Recuperar Clave</h2>
+      <p class="login-sub" style="margin-bottom:0">Ingresa tu email y te enviamos una clave temporal.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="form-group">
+        <label class="form-label">Tu Email de Admin</label>
+        <input class="form-input" type="email" id="recoverEmail" placeholder="angie.lpz08@gmail.com" onkeypress="if(event.key==='Enter')sendRecovery()">
+      </div>
+      <button class="btn btn-pk" style="width:100%;justify-content:center" id="recoverBtn" onclick="sendRecovery()">Enviar Nueva Clave →</button>
+      <button type="button" onclick="showLoginCard()" style="background:none;border:none;color:var(--mu);font-size:.8rem;cursor:pointer;text-align:center;padding:6px;transition:color .2s" onmouseover="this.style.color='var(--pk)'" onmouseout="this.style.color='var(--mu)'">
+        ← Volver al login
+      </button>
+    </div>
+    <div id="recoverSuccess" style="display:none;margin-top:16px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25);border-radius:var(--r);padding:16px;text-align:center">
+      <div style="font-size:1.5rem;margin-bottom:6px">✅</div>
+      <div style="font-size:.88rem;font-weight:500;color:#4ade80;margin-bottom:4px">¡Email enviado!</div>
+      <div style="font-size:.78rem;color:rgba(255,255,255,.6);line-height:1.6">Revisa tu correo <strong id="sentToEmail" style="color:#4ade80"></strong><br>y usa la nueva clave temporal para entrar.</div>
+    </div>
+    <div id="recoverErr" style="display:none;margin-top:12px;background:rgba(255,107,138,.1);border:1px solid rgba(255,107,138,.25);border-radius:var(--r);padding:10px;color:var(--pk);font-size:.78rem;text-align:center"></div>
+  </div>
+
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="layout" id="appLayout" style="display:none">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-logo">
+      <svg width="32" height="32" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#FF6B8A"/><stop offset="100%" style="stop-color:#FF9F1C"/></linearGradient></defs><rect width="44" height="44" rx="11" fill="url(#lg2)"/><rect x="7" y="18" width="30" height="19" rx="4" fill="white" opacity=".95"/><circle cx="22" cy="27" r="6.5" fill="url(#lg2)"/><circle cx="22" cy="27" r="4" fill="white" opacity=".3"/><circle cx="22" cy="27" r="2.2" fill="white" opacity=".9"/><rect x="16" y="13" width="9" height="5" rx="2" fill="white" opacity=".85"/></svg>
+      <div><div class="sb-logo-txt">Angie Lopez</div><div class="sb-logo-sub">Admin Panel</div></div>
+    </div>
+    <div class="sb-user">
+      <div class="sb-avatar">👩‍💼</div>
+      <div><div class="sb-uname">Angie López</div><div class="sb-urole">Administradora</div></div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-section">Principal</div>
+      <a class="sb-link active" onclick="showPage('dashboard')"><span class="ico">📊</span>Dashboard</a>
+      <a class="sb-link" onclick="showPage('jobs')"><span class="ico">📋</span>Trabajos <span id="sbJobCount" style="margin-left:auto;background:var(--pk);color:#fff;font-size:.6rem;padding:2px 7px;border-radius:20px;font-family:'DM Mono',monospace"></span></a>
+      <a class="sb-link" onclick="showPage('clients')"><span class="ico">👥</span>Clientes</a>
+      <a class="sb-link" onclick="showPage('messages')"><span class="ico">💬</span>Mensajes <span id="sbMsgCount" style="margin-left:auto;background:var(--or);color:#fff;font-size:.6rem;padding:2px 7px;border-radius:20px;font-family:'DM Mono',monospace;display:none"></span></a>
+      <div class="sb-section">Herramientas</div>
+      <a class="sb-link" onclick="showPage('files')"><span class="ico">📁</span>Archivos</a>
+      <a class="sb-link" onclick="showPage('payments')"><span class="ico">💳</span>Pagos</a>
+      <a class="sb-link" onclick="showPage('ai')"><span class="ico">✨</span>IA Creativa</a>
+      <div class="sb-section">Acceso</div>
+      <a class="sb-link" onclick="showPage('newclient')"><span class="ico">➕</span>Nuevo Cliente</a>
+      <a class="sb-link" href="../index.html" target="_blank"><span class="ico">🌐</span>Ver Web</a>
+    </nav>
+    <div class="sb-footer">
+      <button class="sb-logout" onclick="logout()">Cerrar Sesión</button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div>
+        <div class="topbar-title" id="pageTitle">Dashboard</div>
+        <div class="topbar-sub" id="pageDate"></div>
+      </div>
+      <div class="topbar-actions">
+        <button class="ia-btn" onclick="showPage('ai')">✨ IA Creativa</button>
+        <button class="btn btn-pk" onclick="openNewJob()">+ Nuevo Trabajo</button>
+      </div>
+    </div>
+
+    <!-- CONTENT PAGES -->
+    <div class="content">
+
+      <!-- ── DASHBOARD ── -->
+      <div id="page-dashboard">
+        <div class="card-grid-3" id="statsGrid" style="margin-bottom:20px">
+          <div class="stat-card"><div class="stat-icon" style="background:rgba(255,107,138,.15)">📋</div><div><div class="stat-num" id="statJobs">—</div><div class="stat-label">Trabajos Activos</div></div></div>
+          <div class="stat-card"><div class="stat-icon" style="background:rgba(74,222,128,.15)">👥</div><div><div class="stat-num" id="statClients">—</div><div class="stat-label">Clientes Totales</div></div></div>
+          <div class="stat-card"><div class="stat-icon" style="background:rgba(255,159,28,.15)">💳</div><div><div class="stat-num" id="statRevenue">—</div><div class="stat-label">Ingresos Mes</div></div></div>
+        </div>
+
+        <div class="card-grid-2" style="margin-bottom:20px">
+          <!-- ACCIONES RÁPIDAS -->
+          <div class="card">
+            <div class="card-title">Acciones Rápidas</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+              <div class="quick-action" onclick="openNewJob()"><div class="ico">📋</div><div class="lbl">Nuevo Trabajo</div></div>
+              <div class="quick-action" onclick="showPage('newclient')"><div class="ico">👤</div><div class="lbl">Nuevo Cliente</div></div>
+              <div class="quick-action" onclick="showPage('ai')"><div class="ico">✨</div><div class="lbl">IA Creativa</div></div>
+              <div class="quick-action" onclick="showPage('messages')"><div class="ico">💬</div><div class="lbl">Mensajes</div></div>
+              <div class="quick-action" onclick="showPage('files')"><div class="ico">📁</div><div class="lbl">Archivos</div></div>
+              <div class="quick-action" onclick="showPage('payments')"><div class="ico">💳</div><div class="lbl">Pagos</div></div>
+            </div>
+          </div>
+          <!-- TRABAJOS PRÓXIMOS A VENCER -->
+          <div class="card">
+            <div class="card-title">Próximos a Vencer</div>
+            <div id="deadlinesList" style="display:flex;flex-direction:column;gap:8px">
+              <div style="color:var(--mu);font-size:.84rem">Cargando...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TRABAJOS RECIENTES -->
+        <div class="card">
+          <div class="card-title" style="display:flex;align-items:center;justify-content:space-between">
+            Trabajos Recientes
+            <button class="btn btn-ghost btn-sm" onclick="showPage('jobs')">Ver todos →</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Cliente</th><th>Trabajo</th><th>Tipo</th><th>Estado</th><th>Progreso</th><th>Entrega</th><th></th></tr></thead>
+              <tbody id="dashJobsTable"><tr><td colspan="7" style="color:var(--mu);text-align:center;padding:24px">Cargando trabajos...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TRABAJOS ── -->
+      <div id="page-jobs" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+          <div><div class="page-title">Trabajos</div><div class="page-sub">Gestión de todos los proyectos</div></div>
+          <div style="display:flex;gap:10px">
+            <select class="form-select" style="width:auto" id="jobFilterStatus" onchange="loadJobs()">
+              <option value="">Todos los estados</option>
+              <option value="pendiente">Pendiente</option>
+              <option value="en_progreso">En Progreso</option>
+              <option value="revision">En Revisión</option>
+              <option value="completado">Completado</option>
+            </select>
+            <button class="btn btn-pk" onclick="openNewJob()">+ Nuevo Trabajo</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Cliente</th><th>Trabajo</th><th>Tipo</th><th>Estado</th><th>Progreso</th><th>Entrega</th><th>Precio</th><th>Acciones</th></tr></thead>
+              <tbody id="jobsTable"><tr><td colspan="8" style="color:var(--mu);text-align:center;padding:24px">Cargando...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CLIENTES ── -->
+      <div id="page-clients" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+          <div><div class="page-title">Clientes</div><div class="page-sub">Base de clientes registrados</div></div>
+          <button class="btn btn-pk" onclick="showPage('newclient')">+ Nuevo Cliente</button>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Nombre</th><th>Email</th><th>Teléfono</th><th>Negocio</th><th>Trabajos</th><th>Registro</th><th>Acciones</th></tr></thead>
+              <tbody id="clientsTable"><tr><td colspan="7" style="color:var(--mu);text-align:center;padding:24px">Cargando...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── NUEVO CLIENTE ── -->
+      <div id="page-newclient" style="display:none">
+        <div class="page-title">Nuevo Cliente</div>
+        <div class="page-sub" style="margin-bottom:24px">Registra un cliente y genera su enlace de acceso al portal</div>
+        <div class="card" style="max-width:540px">
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div class="card-grid-2">
+              <div class="form-group"><label class="form-label">Nombre Completo*</label><input class="form-input" id="nc-name" placeholder="María Rodríguez"></div>
+              <div class="form-group"><label class="form-label">Email*</label><input class="form-input" id="nc-email" type="email" placeholder="maria@email.com"></div>
+            </div>
+            <div class="card-grid-2">
+              <div class="form-group"><label class="form-label">WhatsApp</label><input class="form-input" id="nc-phone" placeholder="+1 809 000 0000"></div>
+              <div class="form-group"><label class="form-label">Negocio / Marca</label><input class="form-input" id="nc-biz" placeholder="Restaurante Piantini"></div>
+            </div>
+            <button class="btn btn-pk" onclick="createClient()" style="align-self:flex-start">Crear Cliente y Generar Link →</button>
+          </div>
+        </div>
+        <div id="nc-result" style="display:none;margin-top:16px" class="card" style="max-width:540px">
+          <div class="card-title">✅ Cliente Creado</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <p style="font-size:.84rem;color:var(--mu)">Enlace de acceso al portal del cliente:</p>
+            <div style="display:flex;gap:8px">
+              <input class="form-input" id="nc-link" readonly style="font-family:'DM Mono',monospace;font-size:.76rem">
+              <button class="btn btn-pk btn-sm" onclick="copyLink()">Copiar</button>
+            </div>
+            <p style="font-size:.78rem;color:var(--mu)">Envía este enlace al cliente por WhatsApp o email. Expira en 7 días.</p>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-ghost btn-sm" onclick="sendWA()">📱 Enviar por WA</button>
+              <button class="btn btn-ghost btn-sm" onclick="openNewJob()">+ Crear Primer Trabajo</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MENSAJES ── -->
+      <div id="page-messages" style="display:none">
+        <div class="page-title">Mensajes</div>
+        <div class="page-sub" style="margin-bottom:20px">Comunicación con clientes por proyecto</div>
+        <div class="card-grid-2">
+          <div class="card" style="height:500px;display:flex;flex-direction:column">
+            <div class="card-title">Conversaciones</div>
+            <div id="convList" style="flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:6px"></div>
+          </div>
+          <div class="card" style="height:500px;padding:0;overflow:hidden;display:flex;flex-direction:column">
+            <div style="padding:14px 18px;border-bottom:1px solid var(--gb)"><div id="activeConvTitle" style="font-weight:500;font-size:.92rem">Selecciona una conversación</div></div>
+            <div class="chat-wrap" style="height:auto">
+              <div class="chat-messages" id="adminChatMsgs"></div>
+              <div class="chat-input-row" style="border-top:1px solid var(--gb)">
+                <input class="chat-input" id="adminMsgInput" placeholder="Escribe un mensaje..." onkeypress="if(event.key==='Enter')sendAdminMsg()">
+                <button class="btn btn-pk btn-sm" onclick="sendAdminMsg()">Enviar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ARCHIVOS ── -->
+      <div id="page-files" style="display:none">
+        <div class="page-title">Archivos</div>
+        <div class="page-sub" style="margin-bottom:20px">Gestión de fotos, entregables y documentos</div>
+        <div class="card-grid-2">
+          <div class="card">
+            <div class="card-title">Fotos recibidas de clientes</div>
+            <div id="clientUploads" style="display:flex;flex-direction:column;gap:8px">
+              <div style="color:var(--mu);font-size:.84rem">Cargando...</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Subir Entregable a Cliente</div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div class="form-group">
+                <label class="form-label">Seleccionar Trabajo</label>
+                <select class="form-select" id="deliv-job"></select>
+              </div>
+              <div class="upload-zone" onclick="document.getElementById('delivFile').click()" id="delivZone">
+                <input type="file" id="delivFile" multiple onchange="handleDelivUpload(event)">
+                <div class="upload-zone-icon">📤</div>
+                <div class="upload-zone-text"><strong>Click para subir</strong> o arrastra los archivos<br><span style="font-size:.76rem">Fotos editadas, PDFs, ZIPs</span></div>
+              </div>
+              <div id="delivProgress" style="display:none">
+                <div style="font-size:.82rem;color:var(--mu);margin-bottom:6px">Subiendo...</div>
+                <div style="background:rgba(255,255,255,.08);border-radius:99px;height:6px"><div id="delivBar" style="background:linear-gradient(90deg,var(--pkd),var(--pk));height:100%;width:0%;border-radius:99px;transition:width .3s"></div></div>
+              </div>
+              <button class="btn btn-ghost btn-sm" id="notifyBtn" style="display:none" onclick="notifyClient()">📧 Notificar al Cliente</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PAGOS ── -->
+      <div id="page-payments" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+          <div><div class="page-title">Pagos</div><div class="page-sub">Registro y seguimiento de pagos</div></div>
+          <button class="btn btn-pk" onclick="openNewPayment()">+ Registrar Pago</button>
+        </div>
+        <div class="card-grid-3" style="margin-bottom:20px">
+          <div class="stat-card"><div class="stat-icon" style="background:rgba(74,222,128,.15)">✅</div><div><div class="stat-num" id="payConfirmed">—</div><div class="stat-label">Confirmados</div></div></div>
+          <div class="stat-card"><div class="stat-icon" style="background:rgba(255,159,28,.15)">⏳</div><div><div class="stat-num" id="payPending">—</div><div class="stat-label">Pendientes</div></div></div>
+          <div class="stat-card"><div class="stat-icon" style="background:rgba(255,107,138,.15)">💰</div><div><div class="stat-num" id="payTotal">—</div><div class="stat-label">Total Mes</div></div></div>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Cliente</th><th>Trabajo</th><th>Monto</th><th>Método</th><th>Estado</th><th>Fecha</th><th>Referencia</th><th>Acciones</th></tr></thead>
+              <tbody id="paymentsTable"><tr><td colspan="8" style="color:var(--mu);text-align:center;padding:24px">Cargando...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── IA CREATIVA ── -->
+      <div id="page-ai" style="display:none">
+        <div class="page-title">✨ IA Creativa</div>
+        <div class="page-sub" style="margin-bottom:20px">Asistente creativo con 30 años de experiencia en marketing y diseño</div>
+        <div class="card-grid-2">
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <!-- TIPO DE CONTENIDO -->
+            <div class="card">
+              <div class="card-title">¿Qué necesitas crear?</div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+                <div class="quick-action" onclick="setAIType('logo')"><div class="ico">🏛️</div><div class="lbl">Logo & Identidad</div></div>
+                <div class="quick-action" onclick="setAIType('instagram')"><div class="ico">📸</div><div class="lbl">Post Instagram</div></div>
+                <div class="quick-action" onclick="setAIType('story')"><div class="ico">📱</div><div class="lbl">Story / Reel</div></div>
+                <div class="quick-action" onclick="setAIType('linkedin')"><div class="ico">💼</div><div class="lbl">LinkedIn</div></div>
+                <div class="quick-action" onclick="setAIType('tiktok')"><div class="ico">🎵</div><div class="lbl">TikTok</div></div>
+                <div class="quick-action" onclick="setAIType('copy')"><div class="ico">✍️</div><div class="lbl">Copywriting</div></div>
+                <div class="quick-action" onclick="setAIType('branding')"><div class="ico">🎨</div><div class="lbl">Estrategia Marca</div></div>
+                <div class="quick-action" onclick="setAIType('campana')"><div class="ico">📣</div><div class="lbl">Campaña Digital</div></div>
+                <div class="quick-action" onclick="setAIType('libre')"><div class="ico">💡</div><div class="lbl">Libre</div></div>
+              </div>
+            </div>
+            <!-- CONTEXTO DEL CLIENTE -->
+            <div class="card">
+              <div class="card-title">Contexto del Proyecto</div>
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <div class="form-group">
+                  <label class="form-label">Cliente / Marca (opcional)</label>
+                  <select class="form-select" id="ai-client">
+                    <option value="">Proyecto nuevo / libre</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Tu solicitud</label>
+                  <textarea class="form-textarea" id="ai-prompt" placeholder="Describe lo que necesitas crear..." style="min-height:110px"></textarea>
+                </div>
+                <button class="ia-btn" onclick="runAI()" style="justify-content:center;padding:12px">✨ Generar con IA</button>
+              </div>
+            </div>
+          </div>
+          <!-- OUTPUT -->
+          <div class="card" style="display:flex;flex-direction:column;min-height:500px">
+            <div class="card-title" style="display:flex;align-items:center;gap:8px">
+              <span id="aiTypeLabel">Resultado</span>
+              <span id="aiTyping" style="display:none;color:var(--pk)">• Generando...</span>
+            </div>
+            <div id="aiOutput" style="flex:1;font-size:.88rem;line-height:1.7;color:rgba(255,255,255,.85);white-space:pre-wrap;overflow-y:auto;padding:4px">
+              <div style="color:var(--mu);font-style:italic">Selecciona un tipo de contenido y describe tu solicitud para comenzar.</div>
+            </div>
+            <div style="margin-top:14px;display:flex;gap:8px" id="aiActions" style="display:none">
+              <button class="btn btn-ghost btn-sm" onclick="copyAI()">📋 Copiar</button>
+              <button class="btn btn-ghost btn-sm" onclick="clearAI()">🗑️ Limpiar</button>
+              <button class="btn btn-pk btn-sm" onclick="saveToJob()">💾 Guardar en Trabajo</button>
+            </div>
+          </div>
+        </div>
+        <!-- HISTORIAL -->
+        <div class="card" style="margin-top:14px">
+          <div class="card-title">Historial de esta sesión</div>
+          <div id="aiHistory" style="display:flex;flex-direction:column;gap:8px;max-height:200px;overflow-y:auto">
+            <div style="color:var(--mu);font-size:.82rem">Las generaciones de esta sesión aparecen aquí.</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /layout -->
+
+<!-- ── MODAL NUEVO TRABAJO ── -->
+<div class="modal-overlay" id="jobModal" style="display:none" onclick="if(event.target===this)closeJobModal()">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title" id="jobModalTitle">Nuevo Trabajo</div>
+      <button class="modal-close" onclick="closeJobModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="card-grid-2">
+        <div class="form-group"><label class="form-label">Cliente*</label>
+          <select class="form-select" id="jm-client"><option value="">Seleccionar cliente...</option></select>
+        </div>
+        <div class="form-group"><label class="form-label">Tipo*</label>
+          <select class="form-select" id="jm-type">
+            <option value="fotografia">📸 Fotografía</option>
+            <option value="redes">📱 Redes Sociales</option>
+            <option value="branding">🏛️ Branding</option>
+            <option value="video">🎬 Video</option>
+            <option value="web">🌐 Web</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label class="form-label">Título del Trabajo*</label><input class="form-input" id="jm-title" placeholder="Ej: Sesión fotográfica marca personal"></div>
+      <div class="card-grid-2">
+        <div class="form-group"><label class="form-label">Fecha de Entrega</label><input class="form-input" type="date" id="jm-deadline"></div>
+        <div class="form-group"><label class="form-label">Precio (USD)</label><input class="form-input" type="number" id="jm-price" placeholder="0.00"></div>
+      </div>
+      <div class="card-grid-2">
+        <div class="form-group"><label class="form-label">Estado</label>
+          <select class="form-select" id="jm-status">
+            <option value="pendiente">Pendiente</option>
+            <option value="en_progreso">En Progreso</option>
+            <option value="revision">En Revisión</option>
+            <option value="completado">Completado</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Progreso (%)</label><input class="form-input" type="number" id="jm-progress" min="0" max="100" placeholder="0"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Notas</label><textarea class="form-textarea" id="jm-notes" placeholder="Detalles del trabajo..."></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeJobModal()">Cancelar</button>
+      <button class="btn btn-pk" id="jm-save" onclick="saveJob()">Guardar Trabajo</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── MODAL DETALLE TRABAJO ── -->
+<div class="modal-overlay" id="jobDetailModal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+  <div class="modal" style="width:min(700px,100%)">
+    <div class="modal-head">
+      <div class="modal-title" id="jd-title">Detalle del Trabajo</div>
+      <button class="modal-close" onclick="document.getElementById('jobDetailModal').style.display='none'">✕</button>
+    </div>
+    <div class="modal-body" id="jd-body"></div>
+  </div>
+</div>
+
+<!-- ── MODAL PAGO ── -->
+<div class="modal-overlay" id="payModal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+  <div class="modal">
+    <div class="modal-head"><div class="modal-title">Registrar Pago</div><button class="modal-close" onclick="document.getElementById('payModal').style.display='none'">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Trabajo*</label><select class="form-select" id="pay-job"></select></div>
+      <div class="card-grid-2">
+        <div class="form-group"><label class="form-label">Monto (USD)*</label><input class="form-input" type="number" id="pay-amount" placeholder="0.00"></div>
+        <div class="form-group"><label class="form-label">Método</label>
+          <select class="form-select" id="pay-method">
+            <option value="transferencia">Transferencia</option>
+            <option value="efectivo">Efectivo</option>
+            <option value="tarjeta">Tarjeta</option>
+            <option value="paypal">PayPal</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label class="form-label">Referencia / Comprobante</label><input class="form-input" id="pay-ref" placeholder="Número de confirmación"></div>
+      <div class="form-group"><label class="form-label">Estado</label>
+        <select class="form-select" id="pay-status">
+          <option value="pendiente">Pendiente</option>
+          <option value="confirmado">Confirmado</option>
+        </select>
+      </div>
+      <div class="form-group"><label class="form-label">Notas</label><textarea class="form-textarea" id="pay-notes" placeholder="Observaciones..."></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="document.getElementById('payModal').style.display='none'">Cancelar</button>
+      <button class="btn btn-pk" onclick="savePayment()">Registrar Pago</button>
+    </div>
+  </div>
+</div>
+
+
+<script src="../assets/ala.js"></script>
+<script>
+// ── Supabase inline (no CDN) ────────────────────────────
+const SB_URL='https://mxuoahnnchwxoqcmlira.supabase.co',SB_KEY='sb_publishable_mTml2uNpOY9iNy9u-y_BHg_G3cBfuZk';
+function getSB(){return{from:(t)=>new SBQ(t),storage:{from:(b)=>({'upload':async(p,f)=>{const r=await fetch(`${SB_URL}/storage/v1/object/${b}/${p}`,{method:'POST',headers:{'apikey':SB_KEY,'Authorization':`Bearer ${SB_KEY}`},body:f});if(!r.ok){const e=await r.json();throw new Error(e.error||'Upload failed');}return{data:{path:p},error:null};},'getPublicUrl':(p)=>({'data':{'publicUrl':`${SB_URL}/storage/v1/object/public/${b}/${p}`}})})}}}}
+class SBQ{constructor(t){this.t=t;this.f=[];this.s='*';this.ord=null;this.lim=null;this.sg=false;this.m='GET';this.b=null;this.h={};}
+select(c){this.s=c||'*';return this;}
+eq(c,v){this.f.push(`${c}=eq.${encodeURIComponent(v)}`);return this;}
+neq(c,v){this.f.push(`${c}=neq.${encodeURIComponent(v)}`);return this;}
+gte(c,v){this.f.push(`${c}=gte.${encodeURIComponent(v)}`);return this;}
+order(c,o){this.ord=`${c}.${o?.ascending===false?'desc':'asc'}`;return this;}
+limit(n){this.lim=n;return this;}
+single(){this.sg=true;return this;}
+insert(d){this.m='POST';this.b=Array.isArray(d)?d:[d];this.h={'Prefer':'return=representation'};return this;}
+update(d){this.m='PATCH';this.b=d;this.h={'Prefer':'return=representation'};return this;}
+delete(){this.m='DELETE';return this;}
+async _x(){
+  let u=`${SB_URL}/rest/v1/${this.t}?select=${encodeURIComponent(this.s)}`;
+  if(this.f.length)u+='&'+this.f.join('&');
+  if(this.ord)u+=`&order=${this.ord}`;
+  if(this.lim)u+=`&limit=${this.lim}`;
+  if(this.sg)u+='&limit=1';
+  const h={'apikey':SB_KEY,'Authorization':`Bearer ${SB_KEY}`,'Content-Type':'application/json',...this.h};
+  const o={method:this.m,headers:h};
+  if(this.b)o.body=JSON.stringify(this.b);
+  try{
+    const r=await fetch(u,o);
+    if(!r.ok){const e=await r.json().catch(()=>({}));return{data:null,error:e};}
+    let d=await r.json();
+    if(this.sg)d=Array.isArray(d)?d[0]||null:d;
+    return{data:d,error:null};
+  }catch(e){return{data:null,error:{message:e.message}};}
+}
+then(res,rej){return this._x().then(res,rej);}
+}
+// ── End Supabase inline ──────────────────────────────────
+</script>
+<script>
+// ── ADMIN PASSWORD (simple — cambiar por algo más robusto en producción) ──
+// ── CONFIGURACIÓN ────────────────────────────────────
+const ADMIN_PASS = 'ala2025admin'; // Cambia esto
+const ADMIN_EMAIL = 'angie.lpz08@gmail.com'; // Email del admin
+// Resend.com API key (obtener gratis en resend.com → API Keys)
+const RESEND_KEY = 're_1Q5Y69fk_PhFt5wxefXmM6d4kD3KQRkth';
+const AI_PROXY = '/.netlify/functions/ai-proxy';
+const EMAIL_PROXY = '/.netlify/functions/email-proxy';
+
+let currentPage = 'dashboard';
+let editingJobId = null;
+let activeConvJobId = null;
+let aiType = 'libre';
+let aiHistory = [];
+let newClientId = null;
+
+// ── INIT ──────────────────────────────────────────────
+window.addEventListener('load', () => {
+  document.getElementById('pageDate').textContent = new Date().toLocaleDateString('es-DO', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+  const sess = Auth.get();
+  if (sess?.role === 'admin') showApp();
+  else showLogin();
+});
+
+// ── LOGIN / FORGOT ────────────────────────────────────
+function showLogin() {
+  const lg = document.getElementById('loadingGate');
+  if(lg) lg.style.display='none';
+  document.getElementById('loginGate').style.display='flex';
+  document.getElementById('loginCard').style.display='';
+  document.getElementById('forgotCard').style.display='none';
+}
+
+function showApp() {
+  const lg = document.getElementById('loadingGate');
+  if(lg) lg.style.display='none';
+  document.getElementById('loginGate').style.display='none';
+  document.getElementById('appLayout').style.display='grid';
+  Auth.save({ role:'admin', name:'Angie López' });
+  loadDashboard();
+  loadClientsForSelects();
+}
+
+function showLoginCard() {
+  document.getElementById('loginCard').style.display='';
+  document.getElementById('forgotCard').style.display='none';
+}
+function showForgot() {
+  document.getElementById('loginCard').style.display='none';
+  document.getElementById('forgotCard').style.display='';
+  document.getElementById('recoverSuccess').style.display='none';
+  document.getElementById('recoverErr').style.display='none';
+  document.getElementById('recoverEmail').value='';
+}
+
+function generateTempPass() {
+  // Genera clave temporal legible: 3 palabras + 2 números
+  const words = ['Luna','Rosa','Foto','Arte','Marca','Flor','Sol','Mar','Cine','Moda','Luz','Tech'];
+  const w1 = words[Math.floor(Math.random()*words.length)];
+  const w2 = words[Math.floor(Math.random()*words.length)];
+  const num = Math.floor(Math.random()*90)+10;
+  return `${w1}${w2}${num}`;
+}
+
+async function sendRecovery() {
+  const email = document.getElementById('recoverEmail').value.trim().toLowerCase();
+  if (!email) {
+    document.getElementById('recoverErr').style.display='';
+    document.getElementById('recoverErr').textContent='Por favor ingresa tu email.';
+    return;
+  }
+  if (email !== ADMIN_EMAIL.toLowerCase()) {
+    document.getElementById('recoverErr').style.display='';
+    document.getElementById('recoverErr').textContent='Ese email no coincide con el email de admin registrado.';
+    return;
+  }
+  const btn = document.getElementById('recoverBtn');
+  UI.spin(btn, true);
+  document.getElementById('recoverErr').style.display='none';
+
+  const tempPass = generateTempPass();
+
+  try {
+    const res = await fetch(EMAIL_PROXY, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type: 'admin_recovery',
+        to: ADMIN_EMAIL,
+        data: { tempPass, panelUrl: window.location.href }
+      })
+    });
+
+    UI.spin(btn, false);
+
+    if (res.ok) {
+      localStorage.setItem('ala_temp_pass', tempPass);
+      localStorage.setItem('ala_temp_expires', Date.now() + 3600000);
+      document.getElementById('sentToEmail').textContent = email;
+      document.getElementById('recoverSuccess').style.display='';
+    } else {
+      const err = await res.json().catch(()=>({message:'Error de red'}));
+      // Fallback: show temp pass on screen if Resend fails
+      document.getElementById('recoverSuccess').style.display='';
+      document.getElementById('recoverSuccess').innerHTML = `
+        <div style="font-size:1.3rem;margin-bottom:8px">⚠️</div>
+        <div style="font-size:.82rem;font-weight:500;color:var(--or);margin-bottom:8px">Email no enviado (configura Resend)</div>
+        <div style="font-size:.78rem;color:rgba(255,255,255,.6);margin-bottom:10px">Tu clave temporal es:</div>
+        <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:10px;font-family:'DM Mono',monospace;font-size:1.1rem;font-weight:700;color:var(--or)">${tempPass}</div>
+        <div style="font-size:.72rem;color:var(--mu);margin-top:8px">Cópiala y úsala para entrar</div>`;
+      localStorage.setItem('ala_temp_pass', tempPass);
+      localStorage.setItem('ala_temp_expires', Date.now() + 3600000);
+    }
+  } catch(e) {
+    UI.spin(btn, false);
+    // Network error fallback - show temp pass on screen
+    document.getElementById('recoverSuccess').style.display='';
+    document.getElementById('recoverSuccess').innerHTML = `
+      <div style="font-size:1.3rem;margin-bottom:8px">🔑</div>
+      <div style="font-size:.82rem;font-weight:500;color:var(--or);margin-bottom:8px">Tu clave temporal</div>
+      <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:10px;font-family:'DM Mono',monospace;font-size:1.1rem;font-weight:700;color:var(--or)">${tempPass}</div>
+      <div style="font-size:.72rem;color:var(--mu);margin-top:8px">Válida 1 hora · Cópiala y úsala para entrar</div>`;
+    localStorage.setItem('ala_temp_pass', tempPass);
+    localStorage.setItem('ala_temp_expires', Date.now() + 3600000);
+  }
+}
+
+
+async function notifyClientEmail(jobId) {
+  const { data: job } = await sb.from('jobs').select('*,clients(name,email)').eq('id', jobId).single();
+  const { data: files } = await sb.from('files').select('id').eq('job_id', jobId).eq('uploaded_by','admin');
+  const portalUrl = window.location.origin.replace('/admin','') + '/client/portal.html';
+  await sendEmail('entregable_ready', job.clients.email, {
+    clientName: job.clients.name,
+    jobTitle: job.title,
+    fileCount: files?.length || 1,
+    portalUrl
+  });
+  UI.toast('📧 Notificación enviada al cliente', 'success');
+}
+
+async function notifyClient() {
+  const jobId = document.getElementById('deliv-job').value;
+  const jobId = document.getElementById('deliv-job').value;
+  const { data: job } = await sb.from('jobs').select('*,clients(name,email,phone)').eq('id', jobId).single();
+  // Send email notification
+  await notifyClientEmail(jobId);
+  // Also open WhatsApp as backup
+  const msg = `Hola ${job.clients?.name}! 👋 Tus entregables están listos en el portal. Descárgalos antes de 15 días. 📸 — Angie`;
+  window.open(`https://wa.me/${(job.clients?.phone||'').replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`);
+}
+
+// ── PAYMENTS ──────────────────────────────────────────
+async function loadPayments() {
+  const { data: payments } = await sb.from('payments').select('*,clients(name),jobs(title)').order('date', { ascending:false });
+  const confirmed = payments?.filter(p=>p.status==='confirmado').reduce((s,p)=>s+parseFloat(p.amount),0)||0;
+  const pending = payments?.filter(p=>p.status==='pendiente').reduce((s,p)=>s+parseFloat(p.amount),0)||0;
+  document.getElementById('payConfirmed').textContent = '$'+confirmed.toFixed(0);
+  document.getElementById('payPending').textContent = '$'+pending.toFixed(0);
+  document.getElementById('payTotal').textContent = '$'+(confirmed+pending).toFixed(0);
+  const tbody = document.getElementById('paymentsTable');
+  tbody.innerHTML = payments?.length ? payments.map(p => `<tr>
+    <td style="font-size:.84rem">${p.clients?.name||'—'}</td>
+    <td style="font-size:.82rem">${p.jobs?.title||'—'}</td>
+    <td style="font-family:'DM Mono',monospace;font-weight:500">$${parseFloat(p.amount).toFixed(2)}</td>
+    <td style="font-size:.8rem;text-transform:capitalize">${p.method||'—'}</td>
+    <td>${p.status==='confirmado'?'<span style="color:var(--gr)">✅ Confirmado</span>':'<span style="color:var(--or)">⏳ Pendiente</span>'}</td>
+    <td style="font-family:'DM Mono',monospace;font-size:.72rem">${UI.date(p.date)}</td>
+    <td style="font-family:'DM Mono',monospace;font-size:.7rem">${p.reference||'—'}</td>
+    <td>${p.status==='pendiente'?`<button class="btn btn-ghost btn-sm" onclick="confirmPay('${p.id}')">✅ Confirmar</button>`:'<span style="color:var(--mu);font-size:.76rem">—</span>'}</td>
+  </tr>`).join('') : '<tr><td colspan="8" style="color:var(--mu);text-align:center;padding:24px">Sin pagos registrados</td></tr>';
+}
+
+function openNewPayment() { document.getElementById('payModal').style.display='flex'; }
+
+async function savePayment() {
+  const data = {
+    job_id: document.getElementById('pay-job').value || null,
+    amount: parseFloat(document.getElementById('pay-amount').value),
+    method: document.getElementById('pay-method').value,
+    reference: document.getElementById('pay-ref').value,
+    status: document.getElementById('pay-status').value,
+    notes: document.getElementById('pay-notes').value
+  };
+  if (data.job_id) {
+    const { data: job } = await sb.from('jobs').select('client_id').eq('id', data.job_id).single();
+    data.client_id = job?.client_id;
+  }
+  const { error } = await sb.from('payments').insert(data);
+  if (error) { UI.toast('Error: '+error.message,'error'); return; }
+  UI.toast('Pago registrado ✅','success');
+  document.getElementById('payModal').style.display='none';
+  if (currentPage==='payments') loadPayments();
+}
+
+async function confirmPay(id) {
+  await sb.from('payments').update({ status:'confirmado' }).eq('id', id);
+  UI.toast('Pago confirmado ✅','success');
+  loadPayments();
+}
+
+// ── IA CREATIVA ───────────────────────────────────────
+const AI_SYSTEM = `Eres una directora creativa y estratega de marketing con 30+ años de experiencia real en agencias de publicidad internacionales (has trabajado en proyectos para Latinoamérica, EEUU y Europa). Tu experiencia combina:
+
+EXPERTISE TÉCNICO:
+- Dirección de arte y diseño gráfico (identidades corporativas, sistemas de marca completos)
+- Fotografía de marca: dirección, composición, edición, storytelling visual
+- Marketing digital: SEO, SEM, Meta Ads, TikTok Ads, email marketing
+- Copywriting de alta conversión: headlines, landing pages, ads, captions
+- Producción audiovisual: guiones, dirección, post-producción
+- Social media strategy: algoritmos, formatos nativos, crecimiento orgánico
+
+FILOSOFÍA:
+Piensas como Ogilvy (estrategia + datos), creas como BBDO (innovación + impacto) y mides como las mejores agencias de performance del mundo. Sabes que el mercado dominicano tiene sus particularidades: el consumidor RD responde al calor humano, a la autenticidad y a la aspiración. No copies formulas gringas — adáptalas.
+
+CUANDO GENERES CONTENIDO:
+- Sé ESPECÍFICO: da el copy exacto, los colores hex, los nombres de fuentes reales
+- Para logos: describe el concepto visual con tanto detalle que un diseñador pueda ejecutarlo sin dudar
+- Para captions: escríbelos listos para publicar, no como "sugerencia de texto"  
+- Para estrategias: dame un plan con fechas, métricas y responsables
+- Para campañas: incluye el concepto creativo central + adaptaciones por plataforma
+- Siempre incluye una razón estratégica detrás de cada decisión creativa
+
+CONTEXTO: Estás generando contenido para Angie Lopez Agency, agencia dominicana premium. Sus clientes son negocios que quieren crecer en RD y expandirse globalmente.
+`;
+
+const AI_TYPES_PROMPTS = {
+  logo: 'Basándote en la solicitud, genera una propuesta completa de identidad de marca que incluya: concepto del logo (descripción visual detallada), paleta de colores (con códigos hex), tipografías recomendadas (primaria y secundaria), eslogan/tagline, tono de marca, y aplicaciones principales. Sé específico y creativo.',
+  instagram: 'Crea contenido completo para Instagram que incluya: caption principal (listo para publicar con emojis y hashtags), variante A/B del caption, 3 opciones de CTA, descripción del visual ideal para la foto/diseño, y mejores horarios de publicación. Copy en español dominicano/latinoamericano.',
+  story: 'Diseña una secuencia de Stories/Reel completa: storyboard con cada pantalla descrita, copy para cada slide, música/audio recomendado, efectos/stickers sugeridos, guión si es Reel hablado, y CTA final. Formato vertical, máximo impacto en 3-7 segundos.',
+  linkedin: 'Crea contenido profesional para LinkedIn: post completo (600-1200 caracteres), hook de apertura poderoso, estructura narrativa, CTA profesional, 5 hashtags relevantes, y sugerencia de imagen/video. Tono: experto pero cercano.',
+  tiktok: 'Desarrolla concepto de TikTok: guión completo segunda a segunda (15-60s), texto on-screen en cada momento, música trending recomendada, efectos y transiciones, hook en los primeros 3 segundos, CTA final. Formato dinámico y viral.',
+  copy: 'Genera copy de alta conversión que incluya: headline principal (máximo impacto), 3 variantes del headline, propuesta de valor única, bullets de beneficios (no características), CTA poderoso, y versión corta para ads. Adaptado al mercado RD.',
+  branding: 'Desarrolla estrategia de marca completa: análisis de posicionamiento, propuesta de valor diferenciada, personalidad y voz de marca, audiencia objetivo detallada, estrategia de contenido para 30 días, y métricas KPI. Orientado a resultados reales.',
+  campana: 'Crea campaña digital integral: objetivo y KPIs, concepto creativo central, adaptación a cada plataforma (IG, FB, TikTok, LinkedIn), calendarpublicaciones 2 semanas, presupuesto sugerido, y métricas de éxito.',
+  libre: ''
+};
+
+function setAIType(type) {
+  aiType = type;
+  document.querySelectorAll('.quick-action').forEach(el => el.style.border = '1px solid var(--gb)');
+  event.currentTarget.style.border = '1px solid var(--pk)';
+  event.currentTarget.style.background = 'rgba(255,107,138,.08)';
+  const labels = {logo:'Logo & Identidad',instagram:'Post Instagram',story:'Story / Reel',linkedin:'LinkedIn',tiktok:'TikTok',copy:'Copywriting',branding:'Estrategia de Marca',campana:'Campaña Digital',libre:'Libre'};
+  document.getElementById('aiTypeLabel').textContent = labels[type]||'Resultado';
+}
+
+function loadAIClients() {
+  // Ya cargados en loadClientsForSelects
+}
+
+async function runAI() {
+  const prompt = document.getElementById('ai-prompt').value.trim();
+  if (!prompt) { UI.toast('Escribe qué necesitas crear', 'warn'); return; }
+  const clientSel = document.getElementById('ai-client');
+  const clientName = clientSel.options[clientSel.selectedIndex]?.text;
+  const typePrompt = AI_TYPES_PROMPTS[aiType] || '';
+  const fullPrompt = `${typePrompt ? typePrompt + '\n\n' : ''}${clientName && clientName !== 'Proyecto nuevo / libre' ? `CLIENTE/MARCA: ${clientName}\n` : ''}SOLICITUD: ${prompt}`;
+
+  const output = document.getElementById('aiOutput');
+  const typing = document.getElementById('aiTyping');
+  output.textContent = '';
+  typing.style.display = 'inline';
+  document.getElementById('aiActions').style.display = 'flex';
+
+  try {
+    const res = await fetch(AI_PROXY, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1500,
+        system: AI_SYSTEM,
+        messages: [{ role: 'user', content: fullPrompt }]
+      })
+    });
+    const data = await res.json();
+    const text = data.content?.[0]?.text || 'Error en la respuesta';
+    output.textContent = text;
+    aiHistory.unshift({ type: aiType, prompt: prompt.slice(0,60)+'...', result: text, time: new Date().toLocaleTimeString() });
+    renderHistory();
+  } catch(e) {
+    output.textContent = 'Error de conexión. Verifica tu conexión e intenta de nuevo.';
+  }
+  typing.style.display = 'none';
+}
+
+function renderHistory() {
+  const hist = document.getElementById('aiHistory');
+  hist.innerHTML = aiHistory.slice(0,5).map(h => `
+    <div style="padding:10px 12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;cursor:pointer" onclick="document.getElementById('aiOutput').textContent=this.dataset.result" data-result="${h.result.replace(/"/g,'&quot;')}">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+        <span style="font-size:.76rem;font-weight:500">${h.prompt}</span>
+        <span style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--mu)">${h.time}</span>
+      </div>
+      <div style="font-size:.72rem;color:var(--mu)">${h.type}</div>
+    </div>`).join('');
+}
+
+function copyAI() { navigator.clipboard.writeText(document.getElementById('aiOutput').textContent); UI.toast('Copiado al portapapeles', 'success'); }
+function clearAI() { document.getElementById('aiOutput').textContent = 'Selecciona un tipo de contenido y describe tu solicitud para comenzar.'; document.getElementById('ai-prompt').value=''; }
+async function saveToJob() { UI.toast('Función disponible pronto — por ahora copia el texto y pégalo en las notas del trabajo', 'info'); }
+function openNewJobForClient(clientId) { openNewJob(); setTimeout(() => { document.getElementById('jm-client').value = clientId; }, 100); }
+</script>
+</body>
+</html>
