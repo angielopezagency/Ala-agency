@@ -11,18 +11,6 @@
 <body>
 
 <!-- ACCESO INVÁLIDO -->
-<!-- LOADING STATE - shows immediately while JS loads -->
-<div id="loadingGate" style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0F0F14;flex-direction:column;gap:16px">
-  <svg width="48" height="48" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
-    <defs><linearGradient id="lgl" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#FF6B8A"/><stop offset="100%" style="stop-color:#FF9F1C"/></linearGradient></defs>
-    <rect width="44" height="44" rx="11" fill="url(#lgl)"/>
-    <rect x="7" y="18" width="30" height="19" rx="4" fill="white" opacity=".95"/>
-    <circle cx="22" cy="27" r="6.5" fill="url(#lgl)"/>
-    <circle cx="22" cy="27" r="2.2" fill="white" opacity=".9"/>
-  </svg>
-  <div style="color:rgba(255,255,255,.5);font-family:monospace;font-size:.75rem;letter-spacing:.15em">Cargando portal...</div>
-</div>
-
 <div id="invalidGate" class="login-page" style="display:none">
   <div class="login-bg"></div>
   <div class="login-card" style="text-align:center">
@@ -253,8 +241,6 @@ let activeJobId = null;
 window.addEventListener('load', async () => {
   document.getElementById('pageDate').textContent = new Date().toLocaleDateString('es-DO', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
   // Hide loading screen
-  document.getElementById('loadingGate').style.display = 'none';
-  
   const params = new URLSearchParams(window.location.search);
   const token = params.get('token');
   if (!token) { showNoToken(); return; }
@@ -262,8 +248,6 @@ window.addEventListener('load', async () => {
 });
 
 function showNoToken() {
-  const lg = document.getElementById('loadingGate');
-  if(lg) lg.style.display='none';
   document.getElementById('invalidGate').style.display = 'flex';
   document.getElementById('invalidGate').innerHTML = `
     <div class="login-bg"></div>
@@ -291,8 +275,6 @@ function showInvalid() {
     </div>`;
 }
 function showPortal() {
-  const lg = document.getElementById('loadingGate');
-  if(lg) lg.style.display='none';
   document.getElementById('portal').style.display='grid';
 }
 
